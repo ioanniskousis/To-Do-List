@@ -1,13 +1,25 @@
+import Todo from './todoClass';
+
 class Reminders {
   constructor() {
     this.todos = [];
   }
 
-  loadDB() {
-    const storage = JSON.parse(localStorage.getItem('myLibrary'));
+  load() {
+    const storage = JSON.parse(localStorage.getItem('todolist-todos'));
     if (storage) {
       storage.forEach((todo) => {
-        this.add(new Todo(todo.id, todo.author, todo.title, todo.numOfPages, todo.read));
+        this.add(new Todo(
+          todo.id,
+          todo.projectId,
+          todo.title,
+          todo.description,
+          todo.dueDate,
+          todo.complete,
+          todo.priority,
+          todo.notes,
+          todo.checklist,
+        ));
       });
     }
   }
@@ -41,7 +53,7 @@ class Reminders {
   }
 
   save() {
-    localStorage.setItem('myLibrary', JSON.stringify(this.todos));
+    localStorage.setItem('todolist-todos', JSON.stringify(this.todos));
   }
 
   newID() {
