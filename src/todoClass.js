@@ -9,6 +9,7 @@ class Todo {
     priority,
     notes,
     checklist = [],
+    order,
   ) {
     this.id = id;
     this.projectId = projectId;
@@ -19,6 +20,7 @@ class Todo {
     this.priority = priority;
     this.notes = notes;
     this.checklist = checklist;
+    this.order = order;
   }
 }
 
