@@ -13,6 +13,8 @@ body {
   padding: 0;
   margin: 0;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  background-color: black;
+  color: white;
 
   /* background-image: url('../images/sea-side.jpg'); */
   background-size: 100% 100%;
