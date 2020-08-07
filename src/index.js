@@ -1,4 +1,5 @@
 import '../resources/stylesheets/style.css';
+import './projectsList';
 
 function component() {
   const element = document.createElement('h1');
@@ -8,3 +9,7 @@ function component() {
 }
 
 document.body.appendChild(component());
+
+const projects = projectsList();
+
+alert(projects.length());
