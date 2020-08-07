@@ -1,15 +1,24 @@
 import Todo from './todoClass';
 
-class Reminders {
-  constructor() {
-    this.todos = [];
-  }
+const todosDB = (() => {
+  const todos = [];
 
-  load() {
-    const storage = JSON.parse(localStorage.getItem('todolist-todos'));
+  const length = () => this.todos.length;
+
+  const save = () => {
+    localStorage.setItem('todolist-todosDB', JSON.stringify(todos));
+  };
+
+  const add = (todo) => {
+    todos.push(todo);
+    save();
+  };
+
+  const load = () => {
+    const storage = JSON.parse(localStorage.getItem('todolist-todosDB'));
     if (storage) {
       storage.forEach((todo) => {
-        this.add(new Todo(
+        todos.push(new Todo(
           todo.id,
           todo.projectId,
           todo.title,
@@ -22,13 +31,9 @@ class Reminders {
         ));
       });
     }
-  }
+  };
 
-  length() {
-    return this.todos.length;
-  }
-
-  find(id) {
+  const findIndex = (id) => {
     for (let index = 0; index < this.todos.length; index += 1) {
       const element = this.todos[index];
       if (element.id === id) {
@@ -36,32 +41,33 @@ class Reminders {
       }
     }
     return -1;
-  }
+  };
 
-  add(todo) {
-    this.todos.push(todo);
-  }
-
-  remove(id) {
-    const index = this.find(id);
+  const remove = (id) => {
+    const index = findIndex(id);
     if (index !== -1) {
       this.todos.splice(index, 1);
-      this.save();
+      save();
       return true;
     }
     return false;
-  }
+  };
 
-  save() {
-    localStorage.setItem('todolist-todos', JSON.stringify(this.todos));
-  }
-
-  newID() {
-    if (this.todos.length === 0) {
+  const newID = () => {
+    if (todos.length === 0) {
       return 1;
     }
     return this.todos[this.todos.length - 1].id + 1;
-  }
-}
+  };
 
-export default Reminders;
+  return {
+    todos,
+    length,
+    load,
+    add,
+    remove,
+    newID,
+  };
+});
+
+export default todosDB;

@@ -1,31 +1,42 @@
 import Project from './projectClass';
 
-const projectsList = (() => {
+const projectsDB = (() => {
   const projects = [];
 
-  const length = () => {
-    return projects.length;
+  const length = () => projects.length;
+
+  const save = () => {
+    localStorage.setItem('todolist-projectsDB', JSON.stringify(projects));
+  };
+
+  const newID = () => {
+    if (projects.length === 0) {
+      return 1;
+    }
+    return projects[projects.length - 1].id + 1;
   };
 
   const add = (project) => {
     projects.push(project);
+    save();
+  };
+
+  const create = (title, description) => {
+    // add(new Project(newID(), title, description));
+    alert(title + ' ' + description);
   };
 
   const load = () => {
-    const storage = JSON.parse(localStorage.getItem('todolist-projects'));
+    const storage = JSON.parse(localStorage.getItem('todolist-projectsDB'));
     if (storage) {
       storage.forEach((project) => {
-        add(new Project(
+        projects.push(new Project(
           project.id,
           project.title,
           project.description,
         ));
       });
     }
-  };
-
-  const save = () => {
-    localStorage.setItem('todolist-projects', JSON.stringify(projects));
   };
 
   const findIndex = (id) => {
@@ -48,21 +59,15 @@ const projectsList = (() => {
     return false;
   };
 
-  const newID = () => {
-    if (projects.length === 0) {
-      return 1;
-    }
-    return this.todos[this.todos.length - 1].id + 1;
-  };
-
   return {
-    load,
     projects,
+    length,
+    load,
     add,
+    create,
     remove,
     newID,
-    length,
   };
 });
 
-export default projectsList;
+export default projectsDB;
