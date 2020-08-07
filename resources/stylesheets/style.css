@@ -1,0 +1,21 @@
+* {
+  box-sizing: border-box;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+* ::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+  /* background-image: url('../images/sea-side.jpg'); */
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
