@@ -1,4 +1,4 @@
-import renderNewProject from './projectNew';
+import renderProjectForm from './projectForm';
 import renderProjectsSideBar from './projectsSideBar';
 
 function saveCallBack(title, description, indexCallBack, projectObject) {
@@ -16,15 +16,15 @@ function saveCallBack(title, description, indexCallBack, projectObject) {
 }
 
 function newProject(indexCallBack) {
-  renderNewProject(indexCallBack, saveCallBack);
+  renderProjectForm(indexCallBack, saveCallBack);
 }
 function editProject(indexCallBack, projectObject) {
-  renderNewProject(indexCallBack, saveCallBack, projectObject);
+  renderProjectForm(indexCallBack, saveCallBack, projectObject);
 }
 
-function deleteProject() {
-  alert('projectsController: deleteProject');
-}
+// function deleteProject() {
+//   alert('projectsController: deleteProject');
+// }
 
 function viewProjects() {
   alert('projectsController: viewProjects');
@@ -35,9 +35,9 @@ function projectsHandler(key, indexCallBack, projectObject) {
     case 'newProject':
       newProject(indexCallBack);
       break;
-    case 'deleteProject':
-      deleteProject();
-      break;
+    // case 'deleteProject':
+    //   deleteProject();
+    //   break;
     case 'viewProjects':
       viewProjects();
       break;

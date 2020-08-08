@@ -8,11 +8,12 @@ import {
 
 import projectsHandler from './projectsController';
 
+// localStorage.removeItem('todolist-projectsDB');
 const projDB = projectsDB();
-projDB.create(['Project Title 01', 'Project Description 01']);
-projDB.create(['Project Title 02', 'Project Description 02']);
-projDB.create(['Project Title 03', 'Project Description 03']);
-projDB.create(['Project Title 04', 'Project Description 04']);
+// projDB.create(['Project Title 01', 'Project Description 01']);
+// projDB.create(['Project Title 02', 'Project Description 02']);
+// projDB.create(['Project Title 03', 'Project Description 03']);
+// projDB.create(['Project Title 04', 'Project Description 04']);
 
 function callBackForProjects(key, args) {
   switch (key) {
@@ -28,6 +29,11 @@ function callBackForProjects(key, args) {
     }
     case 'edit': {
       projectsHandler(key, callBackForProjects, args[0]);
+      break;
+    }
+    case 'delete': {
+      projDB.remove(args[0]);
+      projectsHandler('sideBar', callBackForProjects, projDB);
       break;
     }
     case 'show': {

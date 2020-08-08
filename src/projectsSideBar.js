@@ -2,18 +2,22 @@
 import { gel, crel, doc } from './utils';
 
 function renderProjectsSideBar(indexCallBack, projDB) {
-  let projectsSideBar = gel('div');
+  let projectsSideBar = gel('projectsSideBar');
   if (projectsSideBar) {
     projectsSideBar.innerHTML = '';
   } else {
     projectsSideBar = crel('div');
+    projectsSideBar.id = 'projectsSideBar';
+    projectsSideBar.className = 'projectsSideBar';
+    const main = gel('main');
+    doc(main, projectsSideBar);
   }
-  projectsSideBar.id = 'projectsSideBar';
-  projectsSideBar.className = 'projectsSideBar';
-  const main = gel('main');
-  doc(main, projectsSideBar);
 
-  const { projects } = projDB;
+  function compareProjectDates(a, b) {
+    return b.dateCreated - a.dateCreated;
+  }
+
+  const projects = projDB.projects.sort(compareProjectDates);
   projects.forEach(project => {
     const projectsSideBarRow = crel('div');
     projectsSideBarRow.className = 'projectsSideBarRow';

@@ -14,8 +14,6 @@ body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   background-color: #cee;
-  /* color: white; */
-  /* background-image: url('../images/sea-side.jpg'); */
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
@@ -140,11 +138,18 @@ input[type='button']:active {
   resize: none;
 }
 
-.inputContainer > .button {
+.inputContainer > .save {
   display: block;
   position: absolute;
   bottom: 20px;
   right: 10%;
+}
+
+.inputContainer > .delete {
+  display: block;
+  position: absolute;
+  bottom: 20px;
+  left: 10%;
 }
 
 .closeButton {
@@ -177,10 +182,10 @@ input[type='button']:active {
   border: 1px solid #cee;
   border-radius: 4px;
   width: 30%;
+  min-width: 300px;
   height: 100%;
   padding: 20px;
   overflow: scroll;
-
 }
 
 .projectsSideBarRow {
@@ -190,9 +195,8 @@ input[type='button']:active {
   cursor: pointer;
   color: #555;
   background-repeat: no-repeat;
-  background-size: 24px;
+  background-size: 20px;
   background-position: right center;
-  /* display: flex; */
 }
 
 .projectsSideBarRow:hover {
@@ -203,6 +207,9 @@ input[type='button']:active {
 .projectRowTitle {
   width: calc(100% - 40px);
   padding: 10px 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .projectRowEdit {

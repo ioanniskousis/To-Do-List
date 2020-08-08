@@ -9,9 +9,23 @@ const todosDB = (() => {
     localStorage.setItem('todolist-todosDB', JSON.stringify(todos));
   };
 
+  const newID = () => {
+    if (todos.length === 0) {
+      return 1;
+    }
+    return this.todos[this.todos.length - 1].id + 1;
+  };
+
   const add = (todo) => {
     todos.push(todo);
     save();
+  };
+
+  const create = (args) => {
+    const title = args[0];
+    const description = args[1];
+    const dateCreated = Date.now();
+    add(new Todo(newID(), title, description, dateCreated));
   };
 
   const load = () => {
@@ -53,18 +67,12 @@ const todosDB = (() => {
     return false;
   };
 
-  const newID = () => {
-    if (todos.length === 0) {
-      return 1;
-    }
-    return this.todos[this.todos.length - 1].id + 1;
-  };
-
   return {
     todos,
     length,
     load,
     add,
+    create,
     remove,
     newID,
   };

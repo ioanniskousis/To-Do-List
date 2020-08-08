@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import Project from './projectClass';
 
 const projectsDB = (() => {
@@ -18,12 +19,7 @@ const projectsDB = (() => {
 
   const add = (project) => {
     projects.push(project);
-    // save();
-  };
-
-  const update = (args) => {
-    alert(args);
-    // save();
+    save();
   };
 
   const create = (args) => {
@@ -57,15 +53,30 @@ const projectsDB = (() => {
     return -1;
   };
 
+  const update = (args) => {
+    const index = findIndex(args[0]);
+    if (index !== -1) {
+      projects[index].title = args[1];
+      projects[index].description = args[2];
+      projects[index].dateCreated = Date.now();
+      save();
+      return true;
+    }
+    return false;
+  };
+
   const remove = (id) => {
     const index = findIndex(id);
     if (index !== -1) {
+      // alert('remove ' + id);
       projects.splice(index, 1);
       save();
       return true;
     }
     return false;
   };
+
+  load();
 
   return {
     projects,

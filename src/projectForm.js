@@ -69,7 +69,7 @@ function renderInputContainer(backView, indexCallBack, saveCallBack, projectObje
   renderDescription(backView, inputContainer, projectObject);
 
   const saveButton = crel('div');
-  saveButton.className = 'button';
+  saveButton.className = 'button save';
   saveButton.textContent = 'Save';
   doc(inputContainer, saveButton);
   saveButton.addEventListener('click', () => {
@@ -79,9 +79,22 @@ function renderInputContainer(backView, indexCallBack, saveCallBack, projectObje
       hideProjectNew(backView);
     }
   });
+  if (projectObject) {
+    const deleteButton = crel('div');
+    deleteButton.className = 'button delete';
+    deleteButton.textContent = 'Delete Project';
+    doc(inputContainer, deleteButton);
+    deleteButton.addEventListener('click', () => {
+      // eslint-disable-next-line no-restricted-globals
+      if (confirm('Delete project '.concat(projectObject.title))) {
+        indexCallBack('delete', [projectObject.id]);
+        hideProjectNew(backView);
+      }
+    });
+  }
 }
 
-function renderNewProject(indexCallBack, saveCallBack, projectObject) {
+function renderProjectForm(indexCallBack, saveCallBack, projectObject) {
   const backView = crel('div');
   backView.className = 'backView';
   doc(document.body, backView);
@@ -101,4 +114,4 @@ function renderNewProject(indexCallBack, saveCallBack, projectObject) {
   maximize(backView);
 }
 
-export default renderNewProject;
+export default renderProjectForm;
