@@ -1,4 +1,5 @@
 import '../resources/stylesheets/style.css';
+import { gel } from './utils';
 import projectsDB from './projectsDB';
 // import renderProjects from './projectsView';
 import {
@@ -7,6 +8,7 @@ import {
 } from './renderSkeleton';
 
 import projectsHandler from './projectsController';
+import todosHandler from './todosController';
 
 // localStorage.removeItem('todolist-projectsDB');
 const projDB = projectsDB();
@@ -14,6 +16,16 @@ const projDB = projectsDB();
 // projDB.create(['Project Title 02', 'Project Description 02']);
 // projDB.create(['Project Title 03', 'Project Description 03']);
 // projDB.create(['Project Title 04', 'Project Description 04']);
+
+function callBackForTodos(key, args) {
+  switch (key) {
+    case 'create':
+      alert('create Todo for : ' + args[0].title);
+      break;
+    default:
+      break;
+  }
+}
 
 function callBackForProjects(key, args) {
   switch (key) {
@@ -37,20 +49,10 @@ function callBackForProjects(key, args) {
       break;
     }
     case 'show': {
-      alert('show ' + args[0].title);
-      // projectsHandler(key, callBackForProjects);
+      todosHandler(key, callBackForTodos, args[0]);
       break;
     }
-    default:
-      break;
-  }
-}
-
-function callBackForNavigator(key) {
-  switch (key) {
     case 'newProject':
-    case 'deleteProject':
-    case 'viewProjects':
       projectsHandler(key, callBackForProjects);
       break;
     default:
@@ -58,9 +60,39 @@ function callBackForNavigator(key) {
   }
 }
 
-renderNavigator(callBackForNavigator);
+// function callBackForNavigator(key) {
+//   switch (key) {
+//     case 'newProject':
+//     case 'deleteProject':
+//     case 'viewProjects':
+//       projectsHandler(key, callBackForProjects);
+//       break;
+//     default:
+//       break;
+//   }
+// }
+
+// renderNavigator(callBackForNavigator);
 renderMain();
 projectsHandler('sideBar', callBackForProjects, projDB);
+
+function resize() {
+  if (window.innerWidth > 768) {
+    gel('projectsSideBar').style.display = 'block';
+    gel('todosView').style.display = 'block';
+  } else {
+    gel('projectsSideBar').style.display = 'block';
+    gel('todosView').style.display = 'none';
+  }
+}
+
+window.addEventListener('resize', () => {
+  resize();
+});
+
+window.addEventListener('load', () => {
+  resize();
+});
 
 // projDB.load();
 // let projectsCount = projects.length;

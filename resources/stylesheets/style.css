@@ -25,10 +25,11 @@ main {
   background-color: rgba(255, 255, 255, 0.7);
   margin: 10px auto;
   width: 90%;
-  height: calc(100% - 80px);
+  height: calc(100% - 20px);
   border-radius: 6px;
   border: 1px solid #ddd;
   padding: 20px;
+  display: flex;
 }
 
 .topBar {
@@ -113,7 +114,7 @@ input[type='button']:active {
   text-align: center;
   font-weight: normal;
   color: white;
-  font-size: 22px;
+  font-size: large;
 }
 
 .inputContainer > label {
@@ -179,13 +180,52 @@ input[type='button']:active {
 }
 
 .projectsSideBar {
+  position: relative;
   border: 1px solid #cee;
   border-radius: 4px;
-  width: 30%;
-  min-width: 300px;
-  height: 100%;
-  padding: 20px;
+  flex: 1;
+  min-width: 200px;
+  padding: 60px 20px 20px 20px;
   overflow: scroll;
+  background-color: white;
+}
+
+.projectsSideBarHeader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background-color: rgba(32, 128, 180, 1);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: 1px solid #cee;
+}
+
+.projectsSideBarCaption {
+  font-size: x-large;
+  margin-right: 20px;
+  /* background-color: teal; */
+  flex: 1;
+  text-align: center;
+  color: white;
+}
+
+.addProjectButton {
+  width: 40px;
+  height: 40px;
+  background-image: url('../images/plus-w-32.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 32px 32px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.addProjectButton:hover {
+  background-image: url('../images/plus-32.png');
 }
 
 .projectsSideBarRow {
@@ -196,7 +236,7 @@ input[type='button']:active {
   color: #555;
   background-repeat: no-repeat;
   background-size: 20px;
-  background-position: right center;
+  background-position: right 10px center;
 }
 
 .projectsSideBarRow:hover {
@@ -206,7 +246,7 @@ input[type='button']:active {
 
 .projectRowTitle {
   width: calc(100% - 40px);
-  padding: 10px 0;
+  padding: 10px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -218,8 +258,92 @@ input[type='button']:active {
   top: calc(50% - 20px);
   height: 40px;
   width: 40px;
+  border-radius: 50%;
 }
 
 .projectRowEdit:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(100, 100, 100, 0.1);
+}
+
+.todosView {
+  position: relative;
+  display: block;
+  border: 1px solid #cee;
+  border-radius: 4px;
+  flex: 2;
+  min-width: 300px;
+  margin-left: 10px;
+  padding: 20px;
+  background-color: white;
+}
+
+.todosViewCaption {
+  position: relative;
+  border-bottom: 1px solid #cee;
+  margin-bottom: 4px;
+  color: #555;
+}
+
+.todosTable {
+  overflow: scroll;
+}
+
+.arrowLeft {
+  width: 60px;
+  height: 40px;
+  background-image: url('../images/arrow-left.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 32px 32px;
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  cursor: pointer;
+  border-radius: 50%;
+  visibility: hidden;
+  opacity: 0.5;
+}
+
+.arrowLeft:hover {
+  background-color: #ddd;
+}
+
+.addTodoButton {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 0px;
+  top: 10px;
+  background-image: url('../images/plus-b-32.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 32px 32px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.addTodoButton:hover {
+  background-image: url('../images/plus-32.png');
+}
+
+@media screen and (max-width: 768px) {
+  main {
+    flex-direction: column;
+  }
+
+  .projectsSideBar {
+    /* flex: auto; */
+  }
+
+  .todosView {
+    /* display: none; */
+    /* visibility: hidden; */
+    /* margin-left: 0;
+    margin-top: 10px;
+    flex: auto; */
+  }
+
+  .arrowLeft {
+    visibility: visible;
+  }
 }
