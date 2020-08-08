@@ -7,74 +7,98 @@ import {
   minimize,
 } from './utils';
 
-function renderTitle(inputContainer) {
+function hideProjectNew(backView) {
+  minimize(backView);
+  setTimeout(() => { backView.remove(); }, 200);
+}
+
+function projectNewInputKeyPress(backView, e) {
+  if (e.keyCode === 27) {
+    hideProjectNew(backView);
+  }
+}
+
+function renderTitle(backView, inputContainer, projectObject) {
   const lab = crel('label');
   lab.textContent = 'Title';
   lab.setAttribute('for', 'projectTitle');
   doc(inputContainer, lab);
 
-  const projectTitle = crel('input');
-  projectTitle.setAttribute('type', 'text');
-  projectTitle.setAttribute('id', 'projectTitle');
-  projectTitle.setAttribute('autofocus', 'true');
-  doc(inputContainer, projectTitle);
+  const input = crel('input');
+  input.setAttribute('type', 'text');
+  input.setAttribute('id', 'projectTitle');
+  input.setAttribute('autofocus', 'true');
+  if (projectObject) input.value = projectObject.title;
+  doc(inputContainer, input);
+
+  input.addEventListener('keypress', e => {
+    projectNewInputKeyPress(backView, e);
+  });
 }
 
-function renderDescription(inputContainer) {
+function renderDescription(backView, inputContainer, projectObject) {
   const lab = crel('label');
   lab.textContent = 'Description';
   lab.setAttribute('for', 'projectDescription');
   doc(inputContainer, lab);
 
-  const projectDescription = crel('textarea');
-  projectDescription.setAttribute('id', 'projectDescription');
-  doc(inputContainer, projectDescription);
+  const input = crel('textarea');
+  input.setAttribute('id', 'projectDescription');
+  if (projectObject) input.value = projectObject.description;
+  doc(inputContainer, input);
+
+  input.addEventListener('keypress', e => {
+    projectNewInputKeyPress(backView, e);
+  });
 }
 
-function renderInputContainer(backView, projectsCallBack) {
+function renderInputContainer(backView, indexCallBack, saveCallBack, projectObject) {
   const inputContainer = crel('div');
   inputContainer.className = 'inputContainer';
   doc(backView, inputContainer);
 
   const caption = crel('h3');
-  caption.textContent = 'Define New Project';
+  if (projectObject) {
+    caption.textContent = 'Edit Project';
+  } else {
+    caption.textContent = 'Define New Project';
+  }
   doc(inputContainer, caption);
 
-  renderTitle(inputContainer);
-  renderDescription(inputContainer);
+  renderTitle(backView, inputContainer, projectObject);
+  renderDescription(backView, inputContainer, projectObject);
 
-  const saveButton = crel('input');
-  saveButton.setAttribute('type', 'button');
-  saveButton.value = 'Save';
+  const saveButton = crel('div');
+  saveButton.className = 'button';
+  saveButton.textContent = 'Save';
   doc(inputContainer, saveButton);
   saveButton.addEventListener('click', () => {
-    const projectTitle = gel('projectTitle').value;
-    if (projectTitle.length > 0) {
-      const projectDescription = gel('projectDescription').value;
-      projectsCallBack('newProject', [projectTitle, projectDescription]);
-      minimize(backView);
-      setTimeout(() => { backView.remove(); }, 200);
-    } else {
-      alert('Title Can\'t be empty');
+    const title = gel('projectTitle').value.trim();
+    const description = gel('projectDescription').value.trim();
+    if (saveCallBack(title, description, indexCallBack, projectObject)) {
+      hideProjectNew(backView);
     }
   });
 }
 
-function renderNewProject(projectsCallBack) {
+function renderNewProject(indexCallBack, saveCallBack, projectObject) {
   const backView = crel('div');
   backView.className = 'backView';
   doc(document.body, backView);
-  maximize(backView);
+  backView.setAttribute('tabindex', '0');
+  backView.addEventListener('keypress', e => {
+    projectNewInputKeyPress(backView, e);
+  });
 
   const closeButton = crel('div');
   closeButton.className = 'closeButton';
   doc(backView, closeButton);
   closeButton.addEventListener('click', () => {
-    minimize(backView);
-    setTimeout(() => { backView.remove(); }, 200);
+    hideProjectNew(backView);
   });
 
-  renderInputContainer(backView, projectsCallBack);
+  renderInputContainer(backView, indexCallBack, saveCallBack, projectObject);
+  maximize(backView);
 }
 
 export default renderNewProject;

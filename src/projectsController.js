@@ -1,27 +1,54 @@
 import renderNewProject from './projectNew';
+import renderProjectsSideBar from './projectsSideBar';
 
-function newProject(projectsCallBack) {
-  renderNewProject(projectsCallBack);
+function saveCallBack(title, description, indexCallBack, projectObject) {
+  if (title.length > 0) {
+    if (projectObject) {
+      indexCallBack('update', [projectObject.id, title, description]);
+    } else {
+      indexCallBack('create', [title, description]);
+    }
+  } else {
+    alert('Project Title can not be empty');
+    return false;
+  }
+  return true;
+}
+
+function newProject(indexCallBack) {
+  renderNewProject(indexCallBack, saveCallBack);
+}
+function editProject(indexCallBack, projectObject) {
+  renderNewProject(indexCallBack, saveCallBack, projectObject);
 }
 
 function deleteProject() {
-  alert('deleteProject');
+  alert('projectsController: deleteProject');
 }
 
 function viewProjects() {
-  alert('viewProjects');
+  alert('projectsController: viewProjects');
 }
 
-function projectsHandler(key, projectsCallBack) {
+function projectsHandler(key, indexCallBack, projectObject) {
   switch (key) {
     case 'newProject':
-      newProject(projectsCallBack);
+      newProject(indexCallBack);
       break;
     case 'deleteProject':
       deleteProject();
       break;
     case 'viewProjects':
       viewProjects();
+      break;
+    case 'sideBar':
+      renderProjectsSideBar(indexCallBack, projectObject);
+      break;
+    case 'edit':
+      editProject(indexCallBack, projectObject);
+      break;
+    case 'show':
+      // editProject();
       break;
     default:
       break;

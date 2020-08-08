@@ -1,10 +1,21 @@
+import { crel, doc } from './utils';
+
 function renderProjects(view, projects) {
   projects.forEach(project => {
-    view.innerHTML += ' <hr/>';
-    let output = project.id.toString();
-    output += ' '.concat(project.title);
-    output += ' '.concat(project.description);
-    view.innerHTML += output;
+    const row = crel('div');
+    row.className = 'projectRow';
+
+    const id = crel('div');
+    const title = crel('div');
+    const description = crel('div');
+    const dateCreated = crel('div');
+
+    id.textContent = project.id;
+    title.textContent = project.title;
+    description.textContent = project.description;
+    dateCreated.textContent = project.dateCreated;
+
+    doc(view, row);
   });
 }
 

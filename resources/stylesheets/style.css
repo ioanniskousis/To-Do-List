@@ -13,7 +13,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #eee;
+  background-color: #cee;
   /* color: white; */
   /* background-image: url('../images/sea-side.jpg'); */
   background-size: 100% 100%;
@@ -23,6 +23,26 @@ body {
   height: 100vh;
 }
 
+main {
+  background-color: rgba(255, 255, 255, 0.7);
+  margin: 10px auto;
+  width: 90%;
+  height: calc(100% - 80px);
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  padding: 20px;
+}
+
+.topBar {
+  height: 60px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #ffc;
+}
+
+/* 
 input[type='button'] {
   padding: 10px 30px;
   border: 1px solid #ddd;
@@ -39,6 +59,26 @@ input[type='button']:hover {
 input[type='button']:active {
   color: white;
   border: 1px solid #aaa;
+} */
+
+.button {
+  cursor: pointer;
+  display: inline-block;
+  padding: 10px 30px;
+  border: 1px solid #ddd;
+  background-color: rgb(32, 128, 180);
+  border-radius: 4px;
+  font-size: large;
+  color: white;
+}
+
+.button:hover {
+  background-color: rgb(50, 150, 200);
+}
+
+.button:active {
+  color: white;
+  border: 1px solid #aaa;
 }
 
 .backView {
@@ -52,7 +92,6 @@ input[type='button']:active {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: x-large;
   overflow: hidden;
 }
 
@@ -101,7 +140,7 @@ input[type='button']:active {
   resize: none;
 }
 
-.inputContainer > input[type='button'] {
+.inputContainer > .button {
   display: block;
   position: absolute;
   bottom: 20px;
@@ -128,4 +167,52 @@ input[type='button']:active {
 
 .closeButton:active {
   background-color: gray;
+}
+
+.projectRow {
+  display: flex;
+}
+
+.projectsSideBar {
+  border: 1px solid #cee;
+  border-radius: 4px;
+  width: 30%;
+  height: 100%;
+  padding: 20px;
+  overflow: scroll;
+
+}
+
+.projectsSideBarRow {
+  position: relative;
+  border-bottom: 1px solid #cee;
+  margin-bottom: 4px;
+  cursor: pointer;
+  color: #555;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  background-position: right center;
+  /* display: flex; */
+}
+
+.projectsSideBarRow:hover {
+  color: brown;
+  background-image: url('../images/edit-32.png');
+}
+
+.projectRowTitle {
+  width: calc(100% - 40px);
+  padding: 10px 0;
+}
+
+.projectRowEdit {
+  position: absolute;
+  right: 0;
+  top: calc(50% - 20px);
+  height: 40px;
+  width: 40px;
+}
+
+.projectRowEdit:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }

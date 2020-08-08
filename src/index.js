@@ -1,49 +1,60 @@
 import '../resources/stylesheets/style.css';
 import projectsDB from './projectsDB';
-import renderProjects from './projectsView';
-import renderNavigator from './renderNavigator';
+// import renderProjects from './projectsView';
+import {
+  renderMain,
+  renderNavigator,
+} from './renderSkeleton';
+
 import projectsHandler from './projectsController';
 
 const projDB = projectsDB();
+projDB.create(['Project Title 01', 'Project Description 01']);
+projDB.create(['Project Title 02', 'Project Description 02']);
+projDB.create(['Project Title 03', 'Project Description 03']);
+projDB.create(['Project Title 04', 'Project Description 04']);
 
-function projectsCallBack(key, args) {
+function callBackForProjects(key, args) {
   switch (key) {
-    case 'newProject':
-      projDB.create(args[0], args[1]);
+    case 'create': {
+      projDB.create(args);
+      projectsHandler('sideBar', callBackForProjects, projDB);
       break;
+    }
+    case 'update': {
+      projDB.update(args);
+      projectsHandler('sideBar', callBackForProjects, projDB);
+      break;
+    }
+    case 'edit': {
+      projectsHandler(key, callBackForProjects, args[0]);
+      break;
+    }
+    case 'show': {
+      alert('show ' + args[0].title);
+      // projectsHandler(key, callBackForProjects);
+      break;
+    }
     default:
       break;
   }
 }
 
-function navigatorCallBack(key) {
+function callBackForNavigator(key) {
   switch (key) {
     case 'newProject':
     case 'deleteProject':
     case 'viewProjects':
-      projectsHandler(key, projectsCallBack);
+      projectsHandler(key, callBackForProjects);
       break;
     default:
       break;
   }
 }
 
-function component() {
-  const element = document.createElement('div');
-  element.style.fontSize = '32px';
-  element.style.padding = '20px';
-  element.style.backgroundColor = '#ccc';
-  // element.innerHTML = 'To Do List';
-
-  return element;
-}
-
-const div = component();
-
-document.body.appendChild(div);
-renderNavigator(div, navigatorCallBack);
-
-
+renderNavigator(callBackForNavigator);
+renderMain();
+projectsHandler('sideBar', callBackForProjects, projDB);
 
 // projDB.load();
 // let projectsCount = projects.length;
