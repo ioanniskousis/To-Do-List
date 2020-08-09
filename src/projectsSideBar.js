@@ -2,10 +2,13 @@
 import { gel, crel, doc } from './utils';
 
 function compareProjectDates(a, b) {
-  return b.dateCreated - a.dateCreated;
+  if (a.priority === b.priority) {
+    return b.dateCreated - a.dateCreated;
+  }
+  return b.priority - a.priority;
 }
 
-function renderProjectsSideBarRow(projectsSideBar, project, indexCallBack) {
+function renderProjectsSideBarRow(projectsSideBarTable, project, indexCallBack) {
   const projectsSideBarRow = crel('div');
   projectsSideBarRow.className = 'projectsSideBarRow';
 
@@ -24,7 +27,8 @@ function renderProjectsSideBarRow(projectsSideBar, project, indexCallBack) {
   });
   doc(projectsSideBarRow, projectRowEdit);
 
-  doc(projectsSideBar, projectsSideBarRow);
+  doc(projectsSideBarTable, projectsSideBarRow);
+  projectsSideBarRow.style.height = '40px';
 }
 
 function renderProjectsSideBar(indexCallBack, projDB) {
@@ -48,9 +52,13 @@ function renderProjectsSideBar(indexCallBack, projDB) {
 
   doc(projectsSideBar, projectsSideBarHeader);
 
+  const projectsSideBarTable = crel('div');
+  projectsSideBarTable.className = 'projectsSideBarTable';
+  doc(projectsSideBar, projectsSideBarTable);
+
   const projects = projDB.projects.sort(compareProjectDates);
   projects.forEach(project => {
-    renderProjectsSideBarRow(projectsSideBar, project, indexCallBack);
+    renderProjectsSideBarRow(projectsSideBarTable, project, indexCallBack);
   });
 }
 

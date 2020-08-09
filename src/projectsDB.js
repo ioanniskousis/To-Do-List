@@ -25,8 +25,9 @@ const projectsDB = (() => {
   const create = (args) => {
     const title = args[0];
     const description = args[1];
+    const priority = args[2]
     const dateCreated = Date.now();
-    add(new Project(newID(), title, description, dateCreated));
+    add(new Project(newID(), title, description, dateCreated, priority));
   };
 
   const load = () => {
@@ -38,6 +39,7 @@ const projectsDB = (() => {
           project.title,
           project.description,
           project.dateCreated,
+          project.priority,
         ));
       });
     }
@@ -59,6 +61,7 @@ const projectsDB = (() => {
       projects[index].title = args[1];
       projects[index].description = args[2];
       projects[index].dateCreated = Date.now();
+      projects[index].priority = args[3];
       save();
       return true;
     }

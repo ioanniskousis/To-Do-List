@@ -1,12 +1,12 @@
 import renderProjectForm from './projectForm';
 import renderProjectsSideBar from './projectsSideBar';
 
-function saveCallBack(title, description, indexCallBack, projectObject) {
+function saveCallBack(title, description, priority, indexCallBack, projectObject) {
   if (title.length > 0) {
     if (projectObject) {
-      indexCallBack('update', [projectObject.id, title, description]);
+      indexCallBack('update', [projectObject.id, title, description, priority]);
     } else {
-      indexCallBack('create', [title, description]);
+      indexCallBack('create', [title, description, priority]);
     }
   } else {
     alert('Project Title can not be empty');
