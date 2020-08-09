@@ -23,13 +23,13 @@ function renderProjectCaption(indexCallBack, todosView, project) {
   addTodoButton.className = 'addTodoButton';
   doc(todosViewCaption, addTodoButton);
   addTodoButton.addEventListener('click', () => {
-    indexCallBack('create', [project]);
+    indexCallBack('newTodo', [project]);
   });
 
   doc(todosView, todosViewCaption);
 }
 
-function renderTodos(indexCallBack, project) {
+function renderTodos(indexCallBack, project, todos) {
   const todosView = gel('todosView');
   todosView.innerHTML = '';
 

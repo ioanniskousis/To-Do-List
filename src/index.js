@@ -4,7 +4,7 @@ import projectsDB from './projectsDB';
 // import renderProjects from './projectsView';
 import {
   renderMain,
-  renderNavigator,
+  // renderNavigator,
 } from './renderSkeleton';
 
 import projectsHandler from './projectsController';
@@ -19,6 +19,9 @@ const projDB = projectsDB();
 
 function callBackForTodos(key, args) {
   switch (key) {
+    case 'newTodo':
+      todosHandler(key, callBackForTodos, args[0]);
+      break;
     case 'create':
       alert('create Todo for : ' + args[0].title);
       break;

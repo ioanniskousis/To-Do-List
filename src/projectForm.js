@@ -1,4 +1,3 @@
-/* eslint-disable no-alert */
 import {
   gel,
   crel,
@@ -7,14 +6,14 @@ import {
   minimize,
 } from './utils';
 
-function hideProjectNew(backView) {
+function hideInputView(backView) {
   minimize(backView);
   setTimeout(() => { backView.remove(); }, 200);
 }
 
-function projectNewInputKeyPress(backView, e) {
+function inputViewKeyPress(backView, e) {
   if (e.keyCode === 27) {
-    hideProjectNew(backView);
+    hideInputView(backView);
   }
 }
 
@@ -32,7 +31,7 @@ function renderTitle(backView, inputContainer, projectObject) {
   doc(inputContainer, input);
 
   input.addEventListener('keypress', e => {
-    projectNewInputKeyPress(backView, e);
+    inputViewKeyPress(backView, e);
   });
 }
 
@@ -48,7 +47,7 @@ function renderDescription(backView, inputContainer, projectObject) {
   doc(inputContainer, input);
 
   input.addEventListener('keypress', e => {
-    projectNewInputKeyPress(backView, e);
+    inputViewKeyPress(backView, e);
   });
 }
 
@@ -69,16 +68,17 @@ function renderPriority(backView, inputContainer, projectObject) {
   doc(inputContainer, input);
 
   input.addEventListener('keypress', e => {
-    projectNewInputKeyPress(backView, e);
+    inputViewKeyPress(backView, e);
   });
 }
 
 function renderInputContainer(backView, indexCallBack, saveCallBack, projectObject) {
   const inputContainer = crel('div');
-  inputContainer.className = 'inputContainer';
+  inputContainer.className = 'inputContainer inputContainerProject';
   doc(backView, inputContainer);
 
   const caption = crel('h3');
+  caption.className = 'bgBrown';
   if (projectObject) {
     caption.textContent = 'Edit Project';
   } else {
@@ -99,7 +99,7 @@ function renderInputContainer(backView, indexCallBack, saveCallBack, projectObje
     const description = gel('projectDescription').value.trim();
     const priority = parseInt(gel('projectPriority').value.trim(), 10);
     if (saveCallBack(title, description, priority, indexCallBack, projectObject)) {
-      hideProjectNew(backView);
+      hideInputView(backView);
     }
   });
   if (projectObject) {
@@ -111,7 +111,7 @@ function renderInputContainer(backView, indexCallBack, saveCallBack, projectObje
       // eslint-disable-next-line no-restricted-globals
       if (confirm('Delete project '.concat(projectObject.title))) {
         indexCallBack('delete', [projectObject.id]);
-        hideProjectNew(backView);
+        hideInputView(backView);
       }
     });
   }
@@ -123,14 +123,14 @@ function renderProjectForm(indexCallBack, saveCallBack, projectObject) {
   doc(document.body, backView);
   backView.setAttribute('tabindex', '0');
   backView.addEventListener('keypress', e => {
-    projectNewInputKeyPress(backView, e);
+    inputViewKeyPress(backView, e);
   });
 
   const closeButton = crel('div');
   closeButton.className = 'closeButton';
   doc(backView, closeButton);
   closeButton.addEventListener('click', () => {
-    hideProjectNew(backView);
+    hideInputView(backView);
   });
 
   renderInputContainer(backView, indexCallBack, saveCallBack, projectObject);

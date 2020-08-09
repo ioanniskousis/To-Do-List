@@ -18,6 +18,7 @@ function saveCallBack(title, description, priority, indexCallBack, projectObject
 function newProject(indexCallBack) {
   renderProjectForm(indexCallBack, saveCallBack);
 }
+
 function editProject(indexCallBack, projectObject) {
   renderProjectForm(indexCallBack, saveCallBack, projectObject);
 }
