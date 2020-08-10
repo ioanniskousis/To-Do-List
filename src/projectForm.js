@@ -17,45 +17,45 @@ function inputViewKeyPress(backView, e) {
   }
 }
 
-function renderTitle(backView, inputContainer, projectObject) {
+function renderTitle(backView, containerBody, projectObject) {
   const lab = crel('label');
   lab.textContent = 'Title';
   lab.setAttribute('for', 'projectTitle');
-  doc(inputContainer, lab);
+  doc(containerBody, lab);
 
   const input = crel('input');
   input.setAttribute('type', 'text');
   input.setAttribute('id', 'projectTitle');
   input.setAttribute('autofocus', 'true');
   if (projectObject) input.value = projectObject.title;
-  doc(inputContainer, input);
+  doc(containerBody, input);
 
   input.addEventListener('keypress', e => {
     inputViewKeyPress(backView, e);
   });
 }
 
-function renderDescription(backView, inputContainer, projectObject) {
+function renderDescription(backView, containerBody, projectObject) {
   const lab = crel('label');
   lab.textContent = 'Description';
   lab.setAttribute('for', 'projectDescription');
-  doc(inputContainer, lab);
+  doc(containerBody, lab);
 
   const input = crel('textarea');
   input.setAttribute('id', 'projectDescription');
   if (projectObject) input.value = projectObject.description;
-  doc(inputContainer, input);
+  doc(containerBody, input);
 
   input.addEventListener('keypress', e => {
     inputViewKeyPress(backView, e);
   });
 }
 
-function renderPriority(backView, inputContainer, projectObject) {
+function renderPriority(backView, containerBody, projectObject) {
   const lab = crel('label');
   lab.textContent = 'Priority';
   lab.setAttribute('for', 'projectPriority');
-  doc(inputContainer, lab);
+  doc(containerBody, lab);
 
   const input = crel('input');
   input.setAttribute('type', 'number');
@@ -65,59 +65,83 @@ function renderPriority(backView, inputContainer, projectObject) {
   } else {
     input.value = 0;
   }
-  doc(inputContainer, input);
+  doc(containerBody, input);
 
   input.addEventListener('keypress', e => {
     inputViewKeyPress(backView, e);
   });
 }
 
-function renderInputContainer(backView, indexCallBack, saveCallBack, projectObject) {
-  const inputContainer = crel('div');
-  inputContainer.className = 'inputContainer inputContainerProject';
-  doc(backView, inputContainer);
-
+function renderHeader(inputContainer, obj) {
+  const header = crel('div');
+  header.className = 'inputContainerHeader bgBrown';
   const caption = crel('h3');
-  caption.className = 'bgBrown';
-  if (projectObject) {
+  if (obj) {
     caption.textContent = 'Edit Project';
   } else {
     caption.textContent = 'Define New Project';
   }
   doc(inputContainer, caption);
+  doc(header, caption);
+  doc(inputContainer, header);
+}
 
-  renderTitle(backView, inputContainer, projectObject);
-  renderDescription(backView, inputContainer, projectObject);
-  renderPriority(backView, inputContainer, projectObject);
+function renderBody(backView, inputContainer, obj) {
+  const containerBody = crel('div');
+  containerBody.className = 'inputContainerBody';
 
-  const saveButton = crel('div');
-  saveButton.className = 'button save';
-  saveButton.textContent = 'Save';
-  doc(inputContainer, saveButton);
-  saveButton.addEventListener('click', () => {
-    const title = gel('projectTitle').value.trim();
-    const description = gel('projectDescription').value.trim();
-    const priority = parseInt(gel('projectPriority').value.trim(), 10);
-    if (saveCallBack(title, description, priority, indexCallBack, projectObject)) {
-      hideInputView(backView);
-    }
-  });
-  if (projectObject) {
+  renderTitle(backView, containerBody, obj);
+  renderDescription(backView, containerBody, obj);
+  renderPriority(backView, containerBody, obj);
+
+  doc(inputContainer, containerBody);
+}
+
+function renderFooter(backView, inputContainer, indexCallBack, saveCallBack, obj) {
+  const footer = crel('div');
+  footer.className = 'inputContainerFooter bgBrown';
+
+  if (obj) {
+    footer.style.justifyContent = 'space-between';
     const deleteButton = crel('div');
     deleteButton.className = 'button delete';
     deleteButton.textContent = 'Delete Project';
-    doc(inputContainer, deleteButton);
+    doc(footer, deleteButton);
     deleteButton.addEventListener('click', () => {
-      // eslint-disable-next-line no-restricted-globals
-      if (confirm('Delete project '.concat(projectObject.title))) {
-        indexCallBack('delete', [projectObject.id]);
+      if (confirm('Delete project '.concat(obj.title))) {
+        indexCallBack('delete', [obj.id]);
         hideInputView(backView);
       }
     });
   }
+
+  const saveButton = crel('div');
+  saveButton.className = 'button save';
+  saveButton.textContent = 'Save';
+  doc(footer, saveButton);
+  saveButton.addEventListener('click', () => {
+    const title = gel('projectTitle').value.trim();
+    const description = gel('projectDescription').value.trim();
+    const priority = parseInt(gel('projectPriority').value.trim(), 10);
+    if (saveCallBack(title, description, priority, indexCallBack, obj)) {
+      hideInputView(backView);
+    }
+  });
+  doc(inputContainer, footer);
 }
 
-function renderProjectForm(indexCallBack, saveCallBack, projectObject) {
+function renderInputContainer(backView, indexCallBack, saveCallBack, obj) {
+  const inputContainer = crel('div');
+  inputContainer.className = 'inputContainer';
+
+  renderHeader(inputContainer, obj);
+  renderBody(backView, inputContainer, obj);
+  renderFooter(backView, inputContainer, indexCallBack, saveCallBack, obj);
+
+  doc(backView, inputContainer);
+}
+
+function renderBackView() {
   const backView = crel('div');
   backView.className = 'backView';
   doc(document.body, backView);
@@ -125,14 +149,17 @@ function renderProjectForm(indexCallBack, saveCallBack, projectObject) {
   backView.addEventListener('keypress', e => {
     inputViewKeyPress(backView, e);
   });
-
   const closeButton = crel('div');
   closeButton.className = 'closeButton';
   doc(backView, closeButton);
   closeButton.addEventListener('click', () => {
     hideInputView(backView);
   });
+  return backView;
+}
 
+function renderProjectForm(indexCallBack, saveCallBack, projectObject) {
+  const backView = renderBackView();
   renderInputContainer(backView, indexCallBack, saveCallBack, projectObject);
   maximize(backView);
 }

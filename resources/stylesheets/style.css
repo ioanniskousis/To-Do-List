@@ -102,33 +102,53 @@ main {
   background-color: white;
   overflow: hidden;
   border-radius: 6px;
-}
-
-.inputContainerProject {
   width: 50%;
-  height: 60%;
+  height: 80%;
   max-width: 600px;
-  max-height: 500px;
+  max-height: 600px;
   min-width: 400px;
-  min-height: 500px;
+  min-height: 240px;
+  padding: 0 40px;
 }
 
-.inputContainerTodo {
-  width: 50%;
-  height: 60%;
-  max-width: 800px;
-  max-height: 700px;
-  min-width: 800px;
-  min-height: 700px;
+.inputContainerHeader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.inputContainer > h3 {
-  padding: 15px;
-  margin: 0 0 20px 0;
+.inputContainerHeader > h3 {
   text-align: center;
   font-weight: normal;
   color: white;
   font-size: large;
+}
+
+.inputContainerBody {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 120px);
+  padding: 20px 40px;
+  overflow: scroll;
+}
+
+.inputContainerFooter {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  padding: 0 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .bgGreen {
@@ -139,41 +159,28 @@ main {
   background-color: brown;
 }
 
-.inputContainer > label {
-  margin: 20px 11% 10px 11%;
-  font-size: large;
+.inputContainerBody label {
+  padding-left: 10px;
+  font-size: medium;
   display: block;
 }
 
-.inputContainer > input[type='text'],
-.inputContainer > input[type='number'],
-.inputContainer > textarea {
-  margin: 10px auto;
+.inputContainerBody input[type='text'],
+.inputContainerBody input[type='number'],
+.inputContainerBody textarea {
+  margin-top: 10px;
+  margin-bottom: 30px;
   padding: 10px;
   font-size: large;
   border: 1px solid #999;
   border-radius: 4px;
-  width: 80%;
+  width: 100%;
   display: block;
 }
 
-.inputContainer > textarea {
+.inputContainerBody textarea {
   height: 100px;
   resize: none;
-}
-
-.inputContainer > .save {
-  display: block;
-  position: absolute;
-  bottom: 20px;
-  right: 10%;
-}
-
-.inputContainer > .delete {
-  display: block;
-  position: absolute;
-  bottom: 20px;
-  left: 10%;
 }
 
 .inputContainerToolBar {

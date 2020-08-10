@@ -2,6 +2,8 @@ import renderProjectForm from './projectForm';
 import renderProjectsSideBar from './projectsSideBar';
 
 function saveCallBack(title, description, priority, indexCallBack, projectObject) {
+  // alert(projectObject);
+  // return false;
   if (title.length > 0) {
     if (projectObject) {
       indexCallBack('update', [projectObject.id, title, description, priority]);
