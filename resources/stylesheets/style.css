@@ -196,7 +196,7 @@ main {
   border-bottom: 2px solid rgb(2, 97, 2);
 }
 
-.todoTools{
+.todoTools {
   margin: 10px 0 20px 0;
   height: 70px;
   display: flex;
@@ -220,7 +220,6 @@ main {
 .dueDate > input[type='text'],
 .dueDate > input[type='date'] {
   padding: 4px 10px;
-  font-size: large;
   border: none;
   color: rgb(50, 50, 243);
   border-radius: 4px;
