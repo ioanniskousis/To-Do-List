@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { gel, crel, doc } from './utils';
 
 function renderProjectCaption(indexCallBack, todosView, project) {
@@ -34,13 +35,49 @@ function renderProjectCaption(indexCallBack, todosView, project) {
 function renderTodos(indexCallBack, todosView, project, todos) {
   const todosTable = crel('div');
   for (let index = 0; index < todos.length; index += 1) {
+    const selectorClasses = ['gray', 'blue', 'red', 'green', 'orange', 'cyan'];
     const todo = todos[index];
-    const par = crel('p');
-    par.innerHTML = todo.title;
-    doc(todosTable, par);
-    par.addEventListener('click', () => {
+    const todoPanel = crel('todoPanel');
+    todoPanel.className = 'todoPanel';
+    todoPanel.id = 'todoPanel-'.concat(todo.id);
+    const priorityBox = crel('div');
+    const { priority } = todo;
+    const priorityClass = selectorClasses[priority];
+    priorityBox.className = 'priorityBox priority-'.concat(priorityClass);
+    doc(todoPanel, priorityBox);
+
+    const title = crel('div');
+    title.className = 'todoPanelTitle';
+    title.innerHTML = todo.title;
+    title.addEventListener('click', () => {
       indexCallBack('show', [project, todo]);
     });
+    doc(todoPanel, title);
+
+    const dueDate = crel('div');
+    dueDate.className = 'todoPanelDueDate';
+    if (parseInt(todo.dueDate, 10) > 0) {
+      try {
+        dueDate.innerHTML = format(todo.dueDate, 'MMM dd, yyyy');
+      } catch (error) {
+        dueDate.innerHTML = '';
+      }
+    } else {
+      dueDate.style.color = '#ddd';
+      dueDate.innerHTML = 'no date';
+    }
+    doc(todoPanel, dueDate);
+
+    const completeCheck = crel('input');
+    completeCheck.type = 'checkbox';
+    completeCheck.className = 'todoPanelComplete';
+    completeCheck.checked = todo.complete;
+    completeCheck.addEventListener('click', () => {
+      indexCallBack('updateComplete', [todo, completeCheck.checked]);
+    });
+    doc(todoPanel, completeCheck);
+
+    doc(todosTable, todoPanel);
   }
   doc(todosView, todosTable);
 }

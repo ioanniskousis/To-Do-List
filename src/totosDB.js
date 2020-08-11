@@ -63,6 +63,16 @@ const todosDB = (() => {
     return false;
   };
 
+  const updateComplete = (id, complete) => {
+    const index = findIndex(id);
+    if (index !== -1) {
+      todos[index].complete = complete;
+      save();
+      return true;
+    }
+    return false;
+  };
+
   const load = () => {
     const storage = JSON.parse(localStorage.getItem('todolist-todosDB'));
     if (storage) {
@@ -117,6 +127,7 @@ const todosDB = (() => {
     add,
     create,
     update,
+    updateComplete,
     remove,
     newID,
     projectTodos,

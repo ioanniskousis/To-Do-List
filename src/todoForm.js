@@ -47,11 +47,19 @@ function renderDueDate(todoTools, todo) {
   const dueDateInput = crel('input');
   dueDateInput.type = 'text';
   dueDateInput.id = 'dueDateInput';
-  const todoDate = todo ? new Date(todo.dueDate) : new Date();
-  dueDateInput.value = todoDate;
-  // if (todoDate) {
-  dueDateInput.value = format(todoDate, 'MMM dd, yyyy');
-  // }
+  if (todo) {
+    if (parseInt(todo.dueDate, 10) > 0) {
+      const todoDate = todo ? new Date(todo.dueDate) : new Date();
+      try {
+        dueDateInput.value = format(todoDate, 'MMM dd, yyyy');
+      } catch (error) {
+        dueDateInput.value = '';
+      }
+    }
+  } else {
+    dueDateInput.value = format(new Date(), 'MMM dd, yyyy');
+  }
+
   doc(dueDate, dueDateInput);
 
   doc(todoTools, dueDate);
@@ -111,58 +119,73 @@ function selectPriority(selector) {
   priorityBox.setAttribute('value', selectorValue);
 }
 
+function renderSelector(container, index) {
+  const selectoClass = selectorClasses()[index];
+  const selector = crel('div');
+  selector.className = 'prioritySelector priority-'.concat(selectoClass);
+  selector.setAttribute('value', index.toString());
+  selector.addEventListener('click', () => {
+    selectPriority(selector);
+  });
+  doc(container, selector);
+}
+
 function renderPrioritySelector(inputContainer) {
   const prioritySelectorContainer = crel('div');
   prioritySelectorContainer.className = 'prioritySelectorContainer';
   prioritySelectorContainer.id = 'prioritySelectorContainer';
 
-  const selectorGray = crel('div');
-  selectorGray.className = 'prioritySelector priority-gray';
-  selectorGray.setAttribute('value', '0');
-  selectorGray.addEventListener('click', () => {
-    selectPriority(selectorGray);
-  });
-  doc(prioritySelectorContainer, selectorGray);
+  for (let index = 0; index < 6; index += 1) {
+    renderSelector(prioritySelectorContainer, index) ;
+  }
 
-  const selectorBlue = crel('div');
-  selectorBlue.className = 'prioritySelector priority-blue';
-  selectorBlue.setAttribute('value', '1');
-  selectorBlue.addEventListener('click', () => {
-    selectPriority(selectorBlue);
-  });
-  doc(prioritySelectorContainer, selectorBlue);
+  // const selectorGray = crel('div');
+  // selectorGray.className = 'prioritySelector priority-gray';
+  // selectorGray.setAttribute('value', '0');
+  // selectorGray.addEventListener('click', () => {
+  //   selectPriority(selectorGray);
+  // });
+  // doc(prioritySelectorContainer, selectorGray);
 
-  const selectorRed = crel('div');
-  selectorRed.className = 'prioritySelector priority-red';
-  selectorRed.setAttribute('value', '2');
-  selectorRed.addEventListener('click', () => {
-    selectPriority(selectorRed);
-  });
-  doc(prioritySelectorContainer, selectorRed);
+  // const selectorBlue = crel('div');
+  // selectorBlue.className = 'prioritySelector priority-blue';
+  // selectorBlue.setAttribute('value', '1');
+  // selectorBlue.addEventListener('click', () => {
+  //   selectPriority(selectorBlue);
+  // });
+  // doc(prioritySelectorContainer, selectorBlue);
 
-  const selectorGreen = crel('div');
-  selectorGreen.className = 'prioritySelector priority-green';
-  selectorGreen.setAttribute('value', '3');
-  selectorGreen.addEventListener('click', () => {
-    selectPriority(selectorGreen);
-  });
-  doc(prioritySelectorContainer, selectorGreen);
+  // const selectorRed = crel('div');
+  // selectorRed.className = 'prioritySelector priority-red';
+  // selectorRed.setAttribute('value', '2');
+  // selectorRed.addEventListener('click', () => {
+  //   selectPriority(selectorRed);
+  // });
+  // doc(prioritySelectorContainer, selectorRed);
 
-  const selectorOrange = crel('div');
-  selectorOrange.className = 'prioritySelector priority-orange';
-  selectorOrange.setAttribute('value', '4');
-  selectorOrange.addEventListener('click', () => {
-    selectPriority(selectorOrange);
-  });
-  doc(prioritySelectorContainer, selectorOrange);
+  // const selectorGreen = crel('div');
+  // selectorGreen.className = 'prioritySelector priority-green';
+  // selectorGreen.setAttribute('value', '3');
+  // selectorGreen.addEventListener('click', () => {
+  //   selectPriority(selectorGreen);
+  // });
+  // doc(prioritySelectorContainer, selectorGreen);
 
-  const selectorCyan = crel('div');
-  selectorCyan.className = 'prioritySelector priority-cyan';
-  selectorCyan.setAttribute('value', '5');
-  selectorCyan.addEventListener('click', () => {
-    selectPriority(selectorCyan);
-  });
-  doc(prioritySelectorContainer, selectorCyan);
+  // const selectorOrange = crel('div');
+  // selectorOrange.className = 'prioritySelector priority-orange';
+  // selectorOrange.setAttribute('value', '4');
+  // selectorOrange.addEventListener('click', () => {
+  //   selectPriority(selectorOrange);
+  // });
+  // doc(prioritySelectorContainer, selectorOrange);
+
+  // const selectorCyan = crel('div');
+  // selectorCyan.className = 'prioritySelector priority-cyan';
+  // selectorCyan.setAttribute('value', '5');
+  // selectorCyan.addEventListener('click', () => {
+  //   selectPriority(selectorCyan);
+  // });
+  // doc(prioritySelectorContainer, selectorCyan);
 
   prioritySelectorContainer.addEventListener('mouseleave', () => {
     prioritySelectorContainer.style.visibility = 'hidden';
@@ -240,7 +263,7 @@ function renderNotes(backView, inputContainer, todo) {
   });
 }
 
-function renderCheckItem(checkListContainer, element) {
+function renderCheckItem(checkListContainer, element, index) {
   const checkItem = crel('div');
   checkItem.className = 'checkItem';
 
@@ -252,6 +275,7 @@ function renderCheckItem(checkListContainer, element) {
 
   const checkDescription = crel('input');
   checkDescription.type = 'text';
+  checkDescription.id = 'checkDescription-'.concat(index);
   checkDescription.setAttribute('autocomplete', 'off');
   checkDescription.setAttribute('autocorrect', 'off');
   checkDescription.setAttribute('spellcheck', 'off');
@@ -261,7 +285,7 @@ function renderCheckItem(checkListContainer, element) {
 
   const deleteButton = crel('div');
   deleteButton.className = 'checkItemDelete';
-  deleteButton.addEventListener('click', (element) => {
+  deleteButton.addEventListener('click', () => {
     if (confirm('Delete Check : ' + element.description)) {
       checkItem.remove();
     }
@@ -276,16 +300,18 @@ function renderCheckItems(checkListContainer, todo) {
   if (todo) {
     const checkItems = todo.checklist;
     if (checkItems) {
+      let index = 1;
       checkItems.forEach(element => {
-        renderCheckItem(checkListContainer, element);
+        renderCheckItem(checkListContainer, element, index);
+        index += 1;
       });
     }
   }
 }
 
-function newCheckItemText() {
+function newCheckItemId() {
   const checkItems = gelc('checkItem');
-  return 'Check Item '.concat((checkItems.length + 1).toString());
+  return checkItems.length + 1;
 }
 
 function renderCheckList(containerBody, todo) {
@@ -296,9 +322,12 @@ function renderCheckList(containerBody, todo) {
   addButton.className = 'addTodoCheckButton';
   doc(checkListLabel, addButton);
   addButton.addEventListener('click', () => {
-    const newCheck = { description: newCheckItemText(), check: false };
-    const checkItem = renderCheckItem(gel('checkListContainer'), newCheck);
+    const checkId = newCheckItemId();
+    const newCheck = { description: 'Check Item '.concat(checkId.toString()), check: false };
+    const checkItem = renderCheckItem(gel('checkListContainer'), newCheck, checkId);
     gel('inputContainerBody').scrollTo(0, checkItem.offsetTop);
+    const textBox = gel('checkDescription-'.concat(checkId.toString()));
+    textBox.focus();
   });
 
   doc(containerBody, checkListLabel);
@@ -388,12 +417,11 @@ function renderFooter(backView, inputContainer, indexCallBack, saveCallBack, obj
     deleteButton.className = 'button';
     deleteButton.textContent = 'Delete ToDo';
     deleteButton.addEventListener('click', () => {
-      alert(indexCallBack);
-      // if (confirm('Delete ToDo : --> '.concat(obj.title))) {
-      //   alert(indexCallBack);
-      //   indexCallBack('delete', [obj.id]);
-      //   hideInputView(backView);
-      // }
+      if (confirm('Delete ToDo : '.concat(obj.title))) {
+        // alert(indexCallBack);
+        indexCallBack('delete', [obj.id]);
+        hideInputView(backView);
+      }
     });
     doc(footer, deleteButton);
   }
@@ -440,7 +468,7 @@ function renderBackView() {
     hideInputView(backView);
   });
   return backView;
-}
+} 
 
 function renderTodoForm(indexCallBack, saveCallBack, todo, project) {
   const backView = renderBackView();

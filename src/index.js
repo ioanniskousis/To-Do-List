@@ -37,8 +37,9 @@ function updateTodo(todo, callBack) {
   todosHandler('index', callBack, project, projectTodos);
 }
 
-functio deleteTodo() {
-
+function deleteTodo(id) {
+  todos.remove(id);
+  todosHandler('delete', null, null, id);
 }
 
 function callBackForTodos(key, args) {
@@ -53,10 +54,13 @@ function callBackForTodos(key, args) {
       createTodo(args[0], callBackForTodos);
       break;
     case 'delete':
-      alert('callBackForTodos delete : '.args);
+      deleteTodo(args[0]);
       break;
     case 'update':
       updateTodo(args[0], callBackForTodos);
+      break;
+    case 'updateComplete':
+      todos.updateComplete(args[0].id, args[1]);
       break;
     default:
       break;

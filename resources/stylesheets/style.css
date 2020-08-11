@@ -385,8 +385,9 @@ main {
 
 .projectsSideBar {
   position: relative;
-  border: 1px solid #cee;
-  border-radius: 4px;
+  /* border: 1px solid #cee; */
+  border-right: 1px solid #cee;
+  /* border-radius: 4px; */
   flex: 1;
   min-width: 200px;
   padding: 60px 20px 20px 20px;
@@ -480,11 +481,11 @@ main {
 .todosView {
   position: relative;
   display: block;
-  border: 1px solid #cee;
-  border-radius: 4px;
+  /* border: 1px solid #cee; */
+  /* border-radius: 4px; */
   flex: 2;
   min-width: 300px;
-  margin-left: 10px;
+  /* margin-left: 10px; */
   padding: 20px;
   background-color: white;
 }
@@ -498,6 +499,46 @@ main {
 
 .todosTable {
   overflow: scroll;
+}
+
+.todoPanel {
+  border-bottom: 1px solid #aaa;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.todoPanelTitle {
+  flex: 1;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: medium;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.todoPanelDueDate {
+  width: 120px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: medium;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #777;
+}
+
+.todoPanelComplete {
+  display: block;
+  height: 100% !important;
 }
 
 .arrowLeft {
@@ -576,15 +617,7 @@ main {
   }
 
   .projectsSideBar {
-    /* flex: auto; */
-  }
-
-  .todosView {
-    /* display: none; */
-    /* visibility: hidden; */
-    /* margin-left: 0;
-    margin-top: 10px;
-    flex: auto; */
+    border: none;
   }
 
   .arrowLeft {

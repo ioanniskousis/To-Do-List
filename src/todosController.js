@@ -1,5 +1,6 @@
 import renderTodoForm from './todoForm';
 import renderTodosView from './todosView';
+import { gel } from './utils';
 
 function saveCallBack(indexCallBack, todoObject) {
   // alert(JSON.stringify(todoObject));
@@ -33,9 +34,10 @@ function todosHandler(key, indexCallBack, project, todo, update) {
     case 'show':
       showTodo(indexCallBack, todo, project);
       break;
-    case 'delete':
-      alert('todosHandler delete : '.todo.title);
+    case 'delete': {
+      gel('todoPanel-'.concat(todo)).remove();
       break;
+    }
     case 'index':
       renderTodosView(indexCallBack, project, todo, update);
       break;
