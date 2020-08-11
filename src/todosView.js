@@ -34,12 +34,15 @@ function renderProjectCaption(indexCallBack, todosView, project) {
 
 function renderTodos(indexCallBack, todosView, project, todos) {
   const todosTable = crel('div');
+  todosTable.className = 'todosTable';
   for (let index = 0; index < todos.length; index += 1) {
     const selectorClasses = ['gray', 'blue', 'red', 'green', 'orange', 'cyan'];
     const todo = todos[index];
+
     const todoPanel = crel('todoPanel');
     todoPanel.className = 'todoPanel';
     todoPanel.id = 'todoPanel-'.concat(todo.id);
+
     const priorityBox = crel('div');
     const { priority } = todo;
     const priorityClass = selectorClasses[priority];

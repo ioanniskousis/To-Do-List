@@ -3,8 +3,6 @@ import renderTodosView from './todosView';
 import { gel } from './utils';
 
 function saveCallBack(indexCallBack, todoObject) {
-  // alert(JSON.stringify(todoObject));
-  // return false;
   if (todoObject.title.length > 0) {
     if (todoObject.id > 0) {
       indexCallBack('update', [todoObject]);

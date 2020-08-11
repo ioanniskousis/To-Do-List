@@ -76,7 +76,6 @@ const todosDB = (() => {
   const load = () => {
     const storage = JSON.parse(localStorage.getItem('todolist-todosDB'));
     if (storage) {
-      console.log(storage);
       storage.forEach((todo) => {
         todos.push(new Todo(
           todo.id,

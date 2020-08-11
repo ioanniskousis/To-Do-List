@@ -3,23 +3,20 @@ import { gel } from './utils';
 import projectsDB from './projectsDB';
 import todosDB from './totosDB';
 
-// import renderProjects from './projectsView';
 import {
   renderMain,
-  // renderNavigator,
 } from './renderSkeleton';
 
 import projectsHandler from './projectsController';
 import todosHandler from './todosController';
 
-// localStorage.removeItem('todolist-projectsDB');
-// localStorage.removeItem('todolist-todosDB');
+import seed from './seed';
+
+localStorage.removeItem('todolist-projectsDB');
+localStorage.removeItem('todolist-todosDB');
 const projDB = projectsDB();
 const todos = todosDB();
-// projDB.create(['Project Title 01', 'Project Description 01']);
-// projDB.create(['Project Title 02', 'Project Description 02']);
-// projDB.create(['Project Title 03', 'Project Description 03']);
-// projDB.create(['Project Title 04', 'Project Description 04']);
+if (projDB.length() === 0) seed(projDB, todos);
 
 function createTodo(todo, callBack) {
   const project = projDB.find(todo.projectId);
@@ -116,19 +113,6 @@ function callBackForProjects(key, args) {
   }
 }
 
-// function callBackForNavigator(key) {
-//   switch (key) {
-//     case 'newProject':
-//     case 'deleteProject':
-//     case 'viewProjects':
-//       projectsHandler(key, callBackForProjects);
-//       break;
-//     default:
-//       break;
-//   }
-// }
-
-// renderNavigator(callBackForNavigator);
 renderMain();
 projectsHandler('index', callBackForProjects, projDB);
 
@@ -149,38 +133,3 @@ window.addEventListener('resize', () => {
 window.addEventListener('load', () => {
   resize();
 });
-
-// projDB.load();
-// let projectsCount = projects.length;
-// div.innerHTML += '<hr/>';
-
-// div.append(projectsCount.toString().concat(' projects'));
-
-// const newProjectId = projDB.newID();
-
-// div.innerHTML += '<br/>';
-// div.append('newProjectId = '.concat(newProjectId));
-
-// projDB.add({ id: projDB.newID(), title: 'Project To-Do-List', description: 'Project Description' });
-
-// newProjectId = projDB.newID();
-
-// div.innerHTML += '<hr/>';
-
-// projectsCount = projects.length;
-// div.append(projectsCount.toString().concat(' projects'));
-
-// div.innerHTML += '<br/>';
-// div.append('newProjectId = '.concat(newProjectId));
-
-// div.innerHTML += '<hr/>';
-// div.append(projects[0].title.concat(' - ').concat(projects[0].description));
-
-// const { projects } = projDB;
-// renderProjects(div, projects);
-
-// localStorage.removeItem('todolist-projectsDB');
-
-// div.innerHTML += '<hr/>';
-// const projectsCount = projects.length;
-// div.append(projectsCount.toString().concat(' projects'));

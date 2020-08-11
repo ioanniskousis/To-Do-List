@@ -23,21 +23,10 @@ function editProject(indexCallBack, projectObject) {
   renderProjectForm(indexCallBack, saveCallBack, projectObject);
 }
 
-// function deleteProject() {
-//   alert('projectsController: deleteProject');
-// }
-
-// function viewProjects() {
-//   alert('projectsController: viewProjects');
-// }
-
 function projectsHandler(key, indexCallBack, projectObject) {
   switch (key) {
     case 'newProject':
       newProject(indexCallBack);
-      break;
-    case 'viewProjects':
-      // viewProjects();
       break;
     case 'index':
       renderProjectsIndex(indexCallBack, projectObject);

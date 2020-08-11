@@ -1,4 +1,3 @@
-/* eslint-disable prefer-destructuring */
 import Project from './projectClass';
 
 const projectsDB = (() => {
@@ -40,7 +39,6 @@ const projectsDB = (() => {
   const load = () => {
     const storage = JSON.parse(localStorage.getItem('todolist-projectsDB'));
     if (storage) {
-      console.log(storage);
       storage.forEach((project) => {
         projects.push(new Project(
           project.id,

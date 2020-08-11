@@ -139,54 +139,6 @@ function renderPrioritySelector(inputContainer) {
     renderSelector(prioritySelectorContainer, index) ;
   }
 
-  // const selectorGray = crel('div');
-  // selectorGray.className = 'prioritySelector priority-gray';
-  // selectorGray.setAttribute('value', '0');
-  // selectorGray.addEventListener('click', () => {
-  //   selectPriority(selectorGray);
-  // });
-  // doc(prioritySelectorContainer, selectorGray);
-
-  // const selectorBlue = crel('div');
-  // selectorBlue.className = 'prioritySelector priority-blue';
-  // selectorBlue.setAttribute('value', '1');
-  // selectorBlue.addEventListener('click', () => {
-  //   selectPriority(selectorBlue);
-  // });
-  // doc(prioritySelectorContainer, selectorBlue);
-
-  // const selectorRed = crel('div');
-  // selectorRed.className = 'prioritySelector priority-red';
-  // selectorRed.setAttribute('value', '2');
-  // selectorRed.addEventListener('click', () => {
-  //   selectPriority(selectorRed);
-  // });
-  // doc(prioritySelectorContainer, selectorRed);
-
-  // const selectorGreen = crel('div');
-  // selectorGreen.className = 'prioritySelector priority-green';
-  // selectorGreen.setAttribute('value', '3');
-  // selectorGreen.addEventListener('click', () => {
-  //   selectPriority(selectorGreen);
-  // });
-  // doc(prioritySelectorContainer, selectorGreen);
-
-  // const selectorOrange = crel('div');
-  // selectorOrange.className = 'prioritySelector priority-orange';
-  // selectorOrange.setAttribute('value', '4');
-  // selectorOrange.addEventListener('click', () => {
-  //   selectPriority(selectorOrange);
-  // });
-  // doc(prioritySelectorContainer, selectorOrange);
-
-  // const selectorCyan = crel('div');
-  // selectorCyan.className = 'prioritySelector priority-cyan';
-  // selectorCyan.setAttribute('value', '5');
-  // selectorCyan.addEventListener('click', () => {
-  //   selectPriority(selectorCyan);
-  // });
-  // doc(prioritySelectorContainer, selectorCyan);
-
   prioritySelectorContainer.addEventListener('mouseleave', () => {
     prioritySelectorContainer.style.visibility = 'hidden';
   });
@@ -418,7 +370,6 @@ function renderFooter(backView, inputContainer, indexCallBack, saveCallBack, obj
     deleteButton.textContent = 'Delete ToDo';
     deleteButton.addEventListener('click', () => {
       if (confirm('Delete ToDo : '.concat(obj.title))) {
-        // alert(indexCallBack);
         indexCallBack('delete', [obj.id]);
         hideInputView(backView);
       }

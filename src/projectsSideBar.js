@@ -1,4 +1,3 @@
-// import projectsDB from './projectsDB';
 import { gel, crel, doc } from './utils';
 
 function compareProjectDates(a, b) {
