@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import Project from './projectClass';
 
 const projectsDB = (() => {

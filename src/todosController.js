@@ -1,6 +1,6 @@
 import renderTodoForm from './todoForm';
 import renderTodosView from './todosView';
-import { gel } from './utils';
+import { gel, appAlert } from './utils';
 
 function saveCallBack(indexCallBack, todoObject) {
   if (todoObject.title.length > 0) {
@@ -10,7 +10,7 @@ function saveCallBack(indexCallBack, todoObject) {
       indexCallBack('create', [todoObject]);
     }
   } else {
-    alert('Todo Title can not be empty');
+    appAlert('Restriction', 'ToDo Title Can Not Be Empty');
     return false;
   }
   return true;

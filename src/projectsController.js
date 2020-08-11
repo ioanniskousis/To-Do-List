@@ -1,5 +1,6 @@
 import renderProjectForm from './projectForm';
 import renderProjectsIndex from './projectsSideBar';
+import { appAlert } from './utils';
 
 function saveCallBack(title, description, priority, indexCallBack, projectObject) {
   if (title.length > 0) {
@@ -9,7 +10,7 @@ function saveCallBack(title, description, priority, indexCallBack, projectObject
       indexCallBack('create', [title, description, priority]);
     }
   } else {
-    alert('Project Title can not be empty');
+    appAlert('Restriction', 'Project Title Can Not Be Empty');
     return false;
   }
   return true;

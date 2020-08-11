@@ -7,6 +7,7 @@ import {
   doc,
   maximize,
   minimize,
+  appConfirm,
 } from './utils';
 
 function hideInputView(backView) {
@@ -136,7 +137,7 @@ function renderPrioritySelector(inputContainer) {
   prioritySelectorContainer.id = 'prioritySelectorContainer';
 
   for (let index = 0; index < 6; index += 1) {
-    renderSelector(prioritySelectorContainer, index) ;
+    renderSelector(prioritySelectorContainer, index);
   }
 
   prioritySelectorContainer.addEventListener('mouseleave', () => {
@@ -215,6 +216,10 @@ function renderNotes(backView, inputContainer, todo) {
   });
 }
 
+function removeCheckItem(args) {
+  args[0].remove();
+}
+
 function renderCheckItem(checkListContainer, element, index) {
   const checkItem = crel('div');
   checkItem.className = 'checkItem';
@@ -238,9 +243,7 @@ function renderCheckItem(checkListContainer, element, index) {
   const deleteButton = crel('div');
   deleteButton.className = 'checkItemDelete';
   deleteButton.addEventListener('click', () => {
-    if (confirm('Delete Check : ' + element.description)) {
-      checkItem.remove();
-    }
+    appConfirm(removeCheckItem, [checkItem], 'Confirm', 'Delete Check : '.concat(element.description));
   });
   doc(checkItem, deleteButton);
 
@@ -359,6 +362,15 @@ function todoRecord() {
   };
 }
 
+function deleteTodo(args) {
+  const indexCallBack = args[0];
+  const key = args[1];
+  const todoId = args[2];
+  const backView = args[3];
+  indexCallBack(key, [todoId]);
+  hideInputView(backView);
+}
+
 function renderFooter(backView, inputContainer, indexCallBack, saveCallBack, obj) {
   const footer = crel('div');
   footer.className = 'inputContainerFooter bgGreen';
@@ -369,10 +381,7 @@ function renderFooter(backView, inputContainer, indexCallBack, saveCallBack, obj
     deleteButton.className = 'button';
     deleteButton.textContent = 'Delete ToDo';
     deleteButton.addEventListener('click', () => {
-      if (confirm('Delete ToDo : '.concat(obj.title))) {
-        indexCallBack('delete', [obj.id]);
-        hideInputView(backView);
-      }
+      appConfirm(deleteTodo, [indexCallBack, 'delete', obj.id, backView], 'Confirm', 'Delete ToDo : '.concat(obj.title));
     });
     doc(footer, deleteButton);
   }
@@ -419,7 +428,7 @@ function renderBackView() {
     hideInputView(backView);
   });
   return backView;
-} 
+}
 
 function renderTodoForm(indexCallBack, saveCallBack, todo, project) {
   const backView = renderBackView();

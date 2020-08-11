@@ -35,8 +35,8 @@ function renderProjectCaption(indexCallBack, todosView, project) {
 function renderTodos(indexCallBack, todosView, project, todos) {
   const todosTable = crel('div');
   todosTable.className = 'todosTable';
+  const selectorClasses = ['gray', 'blue', 'red', 'green', 'orange', 'cyan'];
   for (let index = 0; index < todos.length; index += 1) {
-    const selectorClasses = ['gray', 'blue', 'red', 'green', 'orange', 'cyan'];
     const todo = todos[index];
 
     const todoPanel = crel('todoPanel');

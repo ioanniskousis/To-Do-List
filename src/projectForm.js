@@ -4,6 +4,7 @@ import {
   doc,
   maximize,
   minimize,
+  appConfirm,
 } from './utils';
 
 function hideInputView(backView) {
@@ -97,6 +98,15 @@ function renderBody(backView, inputContainer, obj) {
   doc(inputContainer, containerBody);
 }
 
+function deleteProject(args) {
+  const indexCallBack = args[0];
+  const key = args[1];
+  const todoId = args[2];
+  const backView = args[3];
+  indexCallBack(key, [todoId]);
+  hideInputView(backView);
+}
+
 function renderFooter(backView, inputContainer, indexCallBack, saveCallBack, obj) {
   const footer = crel('div');
   footer.className = 'inputContainerFooter bgBrown';
@@ -108,10 +118,11 @@ function renderFooter(backView, inputContainer, indexCallBack, saveCallBack, obj
     deleteButton.textContent = 'Delete Project';
     doc(footer, deleteButton);
     deleteButton.addEventListener('click', () => {
-      if (confirm('Delete project '.concat(obj.title))) {
-        indexCallBack('delete', [obj.id]);
-        hideInputView(backView);
-      }
+      appConfirm(deleteProject, [indexCallBack, 'delete', obj.id, backView], 'Confirm', 'Delete project : '.concat(obj.title));
+      // if (confirm('Delete project '.concat(obj.title))) {
+      //   indexCallBack('delete', [obj.id]);
+      //   hideInputView(backView);
+      // }
     });
   }
 

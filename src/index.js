@@ -2,20 +2,19 @@ import '../resources/stylesheets/style.css';
 import { gel } from './utils';
 import projectsDB from './projectsDB';
 import todosDB from './totosDB';
-
-import {
-  renderMain,
-} from './renderSkeleton';
-
+import renderMain from './renderSkeleton';
 import projectsHandler from './projectsController';
 import todosHandler from './todosController';
-
 import seed from './seed';
 
-localStorage.removeItem('todolist-projectsDB');
-localStorage.removeItem('todolist-todosDB');
+/* FOR REVIEWING THE APPLICATION ONLY WITH INITIAL SAMPLE DATA UNCOMMENT THE FOLLOWING 2 LINES */
+// localStorage.removeItem('todolist-projectsDB');
+// localStorage.removeItem('todolist-todosDB');
+
 const projDB = projectsDB();
 const todos = todosDB();
+
+/* function seed() ENABLES REVIEWING THE APPLICATION WITH INITIAL SAMPLE DATA */
 if (projDB.length() === 0) seed(projDB, todos);
 
 function createTodo(todo, callBack) {

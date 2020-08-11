@@ -47,7 +47,6 @@ main {
   background-color: rgba(255, 255, 255, 0.7);
   width: 90%;
   height: 98%;
-  /* border-radius: 6px; */
   border: 1px solid #ddd;
   padding: 20px;
   display: flex;
@@ -67,7 +66,6 @@ main {
   display: inline-block;
   padding: 10px 30px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  /* background-color: rgb(32, 128, 180); */
   border-radius: 4px;
   font-size: large;
   color: white;
@@ -371,9 +369,7 @@ main {
 
 .projectsSideBar {
   position: relative;
-  /* border: 1px solid #cee; */
   border-right: 1px solid #cee;
-  /* border-radius: 4px; */
   flex: 1;
   min-width: 200px;
   padding: 60px 20px 20px 20px;
@@ -467,11 +463,8 @@ main {
 .todosView {
   position: relative;
   display: block;
-  /* border: 1px solid #cee; */
-  /* border-radius: 4px; */
   flex: 2;
   min-width: 300px;
-  /* margin-left: 10px; */
   padding: 20px;
   background-color: white;
 }
@@ -596,11 +589,54 @@ main {
   background-image: url('../images/plus-b-32.png');
 }
 
-@media screen and (max-width: 768px) {
-  /* main {
-    flex-direction: column;
-  } */
+.alertPanel {
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 400px;
+  height: 200px;
+}
 
+.alertTitle {
+  background-color: #103080;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  font-size: large;
+}
+
+.alertText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 120px;
+}
+
+.okAlertButton {
+  background-color: #103080;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  font-size: large;
+  cursor: pointer;
+}
+
+.okAlertButton:hover {
+  background-color: #555;
+}
+
+.confirmButtons {
+  display: flex;
+  height: 50px;
+}
+
+.confirmButtons > div {
+  width: 50%;
+}
+
+@media screen and (max-width: 768px) {
   .projectsSideBar {
     border: none;
   }
