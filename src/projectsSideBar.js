@@ -31,7 +31,7 @@ function renderProjectsSideBarRow(projectsSideBarTable, project, indexCallBack) 
   projectsSideBarRow.style.height = '40px';
 }
 
-function renderProjectsSideBar(indexCallBack, projDB) {
+function renderProjectsIndex(indexCallBack, projDB) {
   const projectsSideBar = gel('projectsSideBar');
   projectsSideBar.innerHTML = '';
 
@@ -56,10 +56,11 @@ function renderProjectsSideBar(indexCallBack, projDB) {
   projectsSideBarTable.className = 'projectsSideBarTable';
   doc(projectsSideBar, projectsSideBarTable);
 
-  const projects = projDB.projects.sort(compareProjectDates);
+  const { projects } = projDB;
+  projects.sort(compareProjectDates);
   projects.forEach(project => {
     renderProjectsSideBarRow(projectsSideBarTable, project, indexCallBack);
   });
 }
 
-export default renderProjectsSideBar;
+export default renderProjectsIndex;

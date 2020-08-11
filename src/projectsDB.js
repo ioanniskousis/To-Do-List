@@ -6,11 +6,16 @@ const projectsDB = (() => {
 
   const length = () => projects.length;
 
+  function compareIds(a, b) {
+    return a.id - b.id;
+  }
+
   const save = () => {
     localStorage.setItem('todolist-projectsDB', JSON.stringify(projects));
   };
 
   const newID = () => {
+    projects.sort(compareIds);
     if (projects.length === 0) {
       return 1;
     }
@@ -25,14 +30,17 @@ const projectsDB = (() => {
   const create = (args) => {
     const title = args[0];
     const description = args[1];
-    const priority = args[2]
+    const priority = args[2];
     const dateCreated = Date.now();
-    add(new Project(newID(), title, description, dateCreated, priority));
+    const project = new Project(newID(), title, description, dateCreated, priority);
+    add(project);
+    return project;
   };
 
   const load = () => {
     const storage = JSON.parse(localStorage.getItem('todolist-projectsDB'));
     if (storage) {
+      console.log(storage);
       storage.forEach((project) => {
         projects.push(new Project(
           project.id,
@@ -43,6 +51,16 @@ const projectsDB = (() => {
         ));
       });
     }
+  };
+
+  const find = (id) => {
+    for (let index = 0; index < projects.length; index += 1) {
+      const element = projects[index];
+      if (element.id === id) {
+        return element;
+      }
+    }
+    return null;
   };
 
   const findIndex = (id) => {
@@ -63,20 +81,20 @@ const projectsDB = (() => {
       projects[index].dateCreated = Date.now();
       projects[index].priority = args[3];
       save();
-      return true;
+      return projects[index];
     }
-    return false;
+    return null;
   };
 
   const remove = (id) => {
     const index = findIndex(id);
     if (index !== -1) {
-      // alert('remove ' + id);
+      const project = projects[index];
       projects.splice(index, 1);
       save();
-      return true;
+      return project;
     }
-    return false;
+    return null;
   };
 
   load();
@@ -90,6 +108,7 @@ const projectsDB = (() => {
     update,
     remove,
     newID,
+    find,
   };
 });
 

@@ -1,10 +1,10 @@
 class Project {
   constructor(id, title, description, dateCreated, priority = 0) {
-    this.id = id;
+    this.id = parseInt(id, 10);
     this.title = title;
     this.description = description;
-    this.dateCreated = dateCreated;
-    this.priority = priority;
+    this.dateCreated = parseInt(dateCreated, 10);
+    this.priority = parseInt(priority, 10);
   }
 }
 

@@ -1,9 +1,7 @@
 import renderProjectForm from './projectForm';
-import renderProjectsSideBar from './projectsSideBar';
+import renderProjectsIndex from './projectsSideBar';
 
 function saveCallBack(title, description, priority, indexCallBack, projectObject) {
-  // alert(projectObject);
-  // return false;
   if (title.length > 0) {
     if (projectObject) {
       indexCallBack('update', [projectObject.id, title, description, priority]);
@@ -29,29 +27,23 @@ function editProject(indexCallBack, projectObject) {
 //   alert('projectsController: deleteProject');
 // }
 
-function viewProjects() {
-  alert('projectsController: viewProjects');
-}
+// function viewProjects() {
+//   alert('projectsController: viewProjects');
+// }
 
 function projectsHandler(key, indexCallBack, projectObject) {
   switch (key) {
     case 'newProject':
       newProject(indexCallBack);
       break;
-    // case 'deleteProject':
-    //   deleteProject();
-    //   break;
     case 'viewProjects':
-      viewProjects();
+      // viewProjects();
       break;
-    case 'sideBar':
-      renderProjectsSideBar(indexCallBack, projectObject);
+    case 'index':
+      renderProjectsIndex(indexCallBack, projectObject);
       break;
     case 'edit':
       editProject(indexCallBack, projectObject);
-      break;
-    case 'show':
-      // editProject();
       break;
     default:
       break;

@@ -81,7 +81,7 @@ function renderHeader(inputContainer, obj) {
   } else {
     caption.textContent = 'Define New Project';
   }
-  doc(inputContainer, caption);
+
   doc(header, caption);
   doc(inputContainer, header);
 }

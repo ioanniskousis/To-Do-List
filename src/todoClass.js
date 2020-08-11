@@ -11,8 +11,8 @@ class Todo {
     checklist = [],
     order,
   ) {
-    this.id = id;
-    this.projectId = projectId;
+    this.id = parseInt(id, 10);
+    this.projectId = parseInt(projectId, 10);
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;

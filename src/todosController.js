@@ -1,12 +1,14 @@
 import renderTodoForm from './todoForm';
-import renderTodos from './todosView';
+import renderTodosView from './todosView';
 
-function saveCallBack(title, description, priority, indexCallBack, todoObject) {
-  if (title.length > 0) {
-    if (todoObject) {
-      indexCallBack('update', [todoObject.id, title, description, priority]);
+function saveCallBack(indexCallBack, todoObject) {
+  // alert(JSON.stringify(todoObject));
+  // return false;
+  if (todoObject.title.length > 0) {
+    if (todoObject.id > 0) {
+      indexCallBack('update', [todoObject]);
     } else {
-      indexCallBack('create', [title, description, priority]);
+      indexCallBack('create', [todoObject]);
     }
   } else {
     alert('Todo Title can not be empty');
@@ -19,29 +21,23 @@ function newTodo(indexCallBack, todo, project) {
   renderTodoForm(indexCallBack, saveCallBack, todo, project);
 }
 
-function editTodo(indexCallBack, todo, project) {
+function showTodo(indexCallBack, todo, project) {
   renderTodoForm(indexCallBack, saveCallBack, todo, project);
 }
 
-function todosHandler(key, indexCallBack, project, todo) {
+function todosHandler(key, indexCallBack, project, todo, update) {
   switch (key) {
     case 'newTodo':
       newTodo(indexCallBack, todo, project);
       break;
-    // // case 'deleteProject':
-    // //   deleteProject();
-    // //   break;
-    // case 'viewProjects':
-    //   viewProjects();
-    //   break;
-    // case 'sideBar':
-    //   renderProjectsSideBar(indexCallBack, projectObject);
-    //   break;
-    case 'edit':
-      editTodo(indexCallBack, todo, project);
-      break;
     case 'show':
-      renderTodos(indexCallBack, project, todo);
+      showTodo(indexCallBack, todo, project);
+      break;
+    case 'delete':
+      alert('todosHandler delete : '.todo.title);
+      break;
+    case 'index':
+      renderTodosView(indexCallBack, project, todo, update);
       break;
     default:
       break;
