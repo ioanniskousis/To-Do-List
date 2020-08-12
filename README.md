@@ -33,7 +33,7 @@
   <p align="center">
     This project is part of the Microverse curriculum in JavaScript course!
     <br />
-    <a href="https://github.com/ioanniskousis/To-Do-List"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/ioanniskousis/To-Do-List"><strong>Explore the docs</strong></a>
     <br />
     <a href="https://ioanniskousis.github.io/To-Do-List/">Live Version</a>
     <br />
@@ -45,7 +45,7 @@
   </p>
 </p>
 
-This is a small To-Do-List application where the user can create projects add a list of tasks to be performed. Each task has its own check list, due date, priority, and notes to keep track of the procedute.
+This is a small To-Do-List application where the user can create projects and add a list of tasks to be performed. Each task has its own check list, due date, priority, and notes to keep track of the procedute.
 
 <hr />
 
