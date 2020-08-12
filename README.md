@@ -52,7 +52,7 @@ This is a small To-Do-List application where the user can create projects add a 
 <!-- TABLE OF CONTENTS -->
 
 ## Table of Contents
-- [Video Prsentation](#video-prsentation)
+- [Video Presentation](#video-presentation)
 - [Screen Shots](#screen-shots)
 - [About the Project](#about-the-project)
 - [Application Instructions](#application-instructions)
@@ -64,14 +64,17 @@ This is a small To-Do-List application where the user can create projects add a 
 - [Contributors](#contributors)
 - [Acknowledgements](#acknowledgements)
 
-## Video Prsentation
-<iframe src='https://www.loom.com/share/b67ce3cd73904485abea20f409983125'></iframe>
+## Video Presentation
+  [Watch Video](https://www.loom.com/share/b67ce3cd73904485abea20f409983125)
 <hr />
 
 ## Screen Shots  
 <img src="resources/images/homepage.png" alt="the homepage">
 <hr />
-
+<img src="resources/images/project.png" alt="the homepage">
+<hr />
+<img src="resources/images/todo.png" alt="the homepage">
+<hr />
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project  
@@ -90,7 +93,7 @@ This is a small To-Do-List application where the user can create projects add a 
   Modules are constructed for each controller.  
 
   * Data are percistently saved in localStorage.  
-  * An initial population is performed when the localStorage is empty of project by data held in seed.js.  
+  * An initial population is performed when the localStorage is empty of projects by data held in seed.js.  
   * Shorthand commands for creating and accessing elements are used and are held in utils.js.  
 
 <hr/>
@@ -106,7 +109,7 @@ This is a small To-Do-List application where the user can create projects add a 
   - By selecting a project its to-dos appear on the right. Each task shows its priority, title, due date, and completion checkbox.  The completion check can be used in place.  
   - Clicking on the title of a task shows the to-do edit form.  
   - To add new tasks click the plus button at the top-right of the to-dos list.  
-  - Each task allows us to enter a title, a description, a notes field to track the procedure keeping notes, due date, priority, completion checkbox and a checklist with description.  
+  - Each task allows us to enter a title, a description, a notes field to track the procedure keeping notes, due date, priority, completion checkbox, and a checklist with description.  
   - All entities can be deleted from their relevant edit views.  
   - Since the persistence of data is achieved using the localStorage, all the data inserted or edited are available only on the computer and the particular browser which have been used.  
   
