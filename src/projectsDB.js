@@ -96,7 +96,7 @@ const projectsDB = (() => {
     return null;
   };
 
-  load();
+  // load();
 
   return {
     projects,

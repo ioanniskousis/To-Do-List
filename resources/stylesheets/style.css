@@ -16,15 +16,21 @@ input[type='checkbox'] {
   background-image: url('../images/check-gray.png');
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: 24px 24px;
+  background-size: 20px 20px;
   width: 70px;
-  height: 24px;
+  height: 30px;
   border: none;
   outline: none;
+  cursor: pointer;
+}
+
+input[type='checkbox']:hover {
+  background-color: rgb(245, 245, 245);
 }
 
 input[type='checkbox']:checked {
   background-image: url('../images/check-green.png');
+  background-size: 28px 28px;
 }
 
 body {
@@ -66,7 +72,6 @@ main {
   display: inline-block;
   padding: 10px 30px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
   font-size: large;
   color: white;
 }
@@ -98,7 +103,6 @@ main {
   position: relative;
   background-color: white;
   overflow: hidden;
-  border-radius: 6px;
   width: 50%;
   height: 90%;
   max-width: 600px;
@@ -202,7 +206,7 @@ main {
   display: flex;
   border-bottom: 2px solid rgb(2, 97, 2);
   padding-bottom: 6px;
-  background-color: #eee;
+  background-color: rgba(238, 238, 238, 0.5);
 }
 
 .todoTools label {
@@ -219,7 +223,7 @@ main {
 
 .dueDate > input[type='text'],
 .dueDate > input[type='date'] {
-  padding: 4px 10px;
+  padding: 6px 10px;
   border: none;
   color: rgb(50, 50, 243);
   border-radius: 4px;
@@ -244,6 +248,10 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.todoPriority:hover {
+  background-color: rgba(238, 238, 238, 1);
 }
 
 .priorityBox {
@@ -452,7 +460,6 @@ main {
   top: calc(50% - 20px);
   height: 40px;
   width: 40px;
-  border-radius: 50%;
 }
 
 .projectRowEdit:hover {
@@ -464,8 +471,40 @@ main {
   display: block;
   flex: 2;
   min-width: 300px;
-  padding: 20px;
   background-color: white;
+}
+
+.todosHeader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background-color: rgba(32, 128, 180, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: 1px solid #cee;
+  color: white;
+}
+
+.todosViewBody {
+  width: 100%;
+  height: 100%;
+  padding: 60px 20px 20px 20px;
+}
+
+.viewPlaceHolder {
+  width: 100%;
+  height: 100%;
+  color: #aaa;
+  font-size: 2vw;
+  padding: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .todosViewCaption {
@@ -500,6 +539,11 @@ main {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding: 2px 10px;
+}
+
+.todoPanelTitle:hover {
+  background-color: rgb(245, 245, 245);
 }
 
 .todoPanelDueDate {
@@ -522,22 +566,21 @@ main {
 
 .arrowLeft {
   width: 60px;
-  height: 40px;
-  background-image: url('../images/arrow-left.png');
+  height: 50px;
+  background-image: url('../images/arrow-left-white.png');
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 32px 32px;
   position: absolute;
-  top: -20px;
-  left: -20px;
+  top: 0;
+  left: 0;
   cursor: pointer;
-  border-radius: 50%;
   visibility: hidden;
-  opacity: 0.5;
 }
 
 .arrowLeft:hover {
-  background-color: #ddd;
+  background-color: rgba(255, 255, 255, 0.5);
+  background-image: url('../images/arrow-left.png');
 }
 
 .addTodoButton {
@@ -563,7 +606,7 @@ main {
   padding: 15px 10px 10px 10px;
   position: relative;
   border-bottom: 2px solid rgb(2, 97, 2);
-  background-color: #eee;
+  background-color: rgba(238, 238, 238, 0.5);
 }
 
 .addTodoCheckButton {
@@ -600,7 +643,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 30px;
+  height: 50px;
   font-size: large;
 }
 
@@ -638,6 +681,14 @@ main {
 @media screen and (max-width: 768px) {
   .projectsSideBar {
     border: none;
+  }
+
+  .main {
+    flex-direction: column;
+  }
+
+  .viewPlaceHolder {
+    font-size: 3vw;
   }
 
   .arrowLeft {

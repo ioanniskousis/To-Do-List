@@ -1,12 +1,13 @@
 import { format } from 'date-fns';
 import { gel, crel, doc } from './utils';
 
-function renderProjectCaption(indexCallBack, todosView, project) {
+function renderProjectCaption(indexCallBack, todosViewBody, project) {
   const todosViewCaption = crel('div');
   todosViewCaption.className = 'todosViewCaption';
+  const todosView = gel('todosView');
   if (todosView.offsetTop === 0) {
-    gel('projectsSideBar').style.display = 'none';
     todosView.style.display = 'block';
+    gel('projectsSideBar').style.display = 'none';
   }
 
   const projectTitle = crel('div');
@@ -29,10 +30,10 @@ function renderProjectCaption(indexCallBack, todosView, project) {
     indexCallBack('newTodo', [project]);
   });
 
-  doc(todosView, todosViewCaption);
+  doc(todosViewBody, todosViewCaption);
 }
 
-function renderTodos(indexCallBack, todosView, project, todos) {
+function renderTodos(indexCallBack, todosViewBody, project, todos) {
   const todosTable = crel('div');
   todosTable.className = 'todosTable';
   const selectorClasses = ['gray', 'blue', 'red', 'green', 'orange', 'cyan'];
@@ -82,30 +83,30 @@ function renderTodos(indexCallBack, todosView, project, todos) {
 
     doc(todosTable, todoPanel);
   }
-  doc(todosView, todosTable);
+  doc(todosViewBody, todosTable);
 }
 
-function renderBackArrow(todosView) {
+function renderBackArrow(todosViewBody) {
   const arrow = crel('div');
   arrow.className = 'arrowLeft';
   arrow.addEventListener('click', () => {
     gel('projectsSideBar').style.display = 'block';
-    todosView.style.display = 'none';
+    todosViewBody.style.display = 'none';
   });
-  doc(todosView, arrow);
+  doc(todosViewBody, arrow);
 }
 
 function projectDeleted(project) {
-  const todosView = gel('todosView');
-  const projectId = parseInt(todosView.getAttribute('projectId'), 10);
+  const todosViewBody = gel('todosViewBody');
+  const projectId = parseInt(todosViewBody.getAttribute('projectId'), 10);
   if (projectId === project.id) {
-    gel('todosView').innerHTML = '';
+    gel('todosViewBody').innerHTML = '';
   }
 }
 
 function projectUpdated(project) {
-  const todosView = gel('todosView');
-  const projectId = parseInt(todosView.getAttribute('projectId'), 10);
+  const todosViewBody = gel('todosViewBody');
+  const projectId = parseInt(todosViewBody.getAttribute('projectId'), 10);
   if (projectId === project.id) {
     gel('todosProjectTitle').textContent = project.title;
     gel('todosProjectDescription').textContent = project.description;
@@ -121,14 +122,15 @@ function renderTodosView(indexCallBack, project, todos, update) {
     projectDeleted(project);
     return;
   }
-  const todosView = gel('todosView');
-  todosView.innerHTML = '';
-  todosView.setAttribute('projectId', project.id);
+  const todosViewBody = gel('todosViewBody');
+  todosViewBody.innerHTML = '';
+  todosViewBody.setAttribute('projectId', project.id);
 
+  const todosView = gel('todosView');
   renderBackArrow(todosView);
 
-  renderProjectCaption(indexCallBack, todosView, project);
-  renderTodos(indexCallBack, todosView, project, todos);
+  renderProjectCaption(indexCallBack, todosViewBody, project);
+  renderTodos(indexCallBack, todosViewBody, project, todos);
 }
 
 export default renderTodosView;

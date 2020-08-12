@@ -31,35 +31,16 @@ function renderProjectsSideBarRow(projectsSideBarTable, project, indexCallBack) 
 }
 
 function renderProjectsIndex(indexCallBack, projDB) {
-  const projectsSideBar = gel('projectsSideBar');
-  projectsSideBar.innerHTML = '';
-
-  const projectsSideBarHeader = crel('div');
-  projectsSideBarHeader.className = 'projectsSideBarHeader';
-
-  const projectsSideBarCaption = crel('div');
-  projectsSideBarCaption.className = ' projectsSideBarCaption';
-  projectsSideBarCaption.textContent = 'Projects';
-  doc(projectsSideBarHeader, projectsSideBarCaption);
-
-  const addProjectButton = crel('div');
-  addProjectButton.className = 'addProjectButton';
-  doc(projectsSideBarHeader, addProjectButton);
-  addProjectButton.addEventListener('click', () => {
-    indexCallBack('newProject');
-  });
-
-  doc(projectsSideBar, projectsSideBarHeader);
-
-  const projectsSideBarTable = crel('div');
-  projectsSideBarTable.className = 'projectsSideBarTable';
-  doc(projectsSideBar, projectsSideBarTable);
+  const projectsSideBarTable = gel('projectsSideBarTable');
 
   const { projects } = projDB;
-  projects.sort(compareProjectDates);
-  projects.forEach(project => {
-    renderProjectsSideBarRow(projectsSideBarTable, project, indexCallBack);
-  });
+  if (projects.length > 0) {
+    projectsSideBarTable.innerHTML = '';
+    projects.sort(compareProjectDates);
+    projects.forEach(project => {
+      renderProjectsSideBarRow(projectsSideBarTable, project, indexCallBack);
+    });
+  }
 }
 
 export default renderProjectsIndex;

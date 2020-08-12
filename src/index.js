@@ -2,7 +2,7 @@ import '../resources/stylesheets/style.css';
 import { gel } from './utils';
 import projectsDB from './projectsDB';
 import todosDB from './totosDB';
-import renderMain from './renderSkeleton';
+import renderMain from './mainSkeleton';
 import projectsHandler from './projectsController';
 import todosHandler from './todosController';
 import seed from './seed';
@@ -112,7 +112,7 @@ function callBackForProjects(key, args) {
   }
 }
 
-renderMain();
+renderMain(callBackForProjects);
 projectsHandler('index', callBackForProjects, projDB);
 
 function resize() {

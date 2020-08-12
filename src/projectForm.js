@@ -119,10 +119,6 @@ function renderFooter(backView, inputContainer, indexCallBack, saveCallBack, obj
     doc(footer, deleteButton);
     deleteButton.addEventListener('click', () => {
       appConfirm(deleteProject, [indexCallBack, 'delete', obj.id, backView], 'Confirm', 'Delete project : '.concat(obj.title));
-      // if (confirm('Delete project '.concat(obj.title))) {
-      //   indexCallBack('delete', [obj.id]);
-      //   hideInputView(backView);
-      // }
     });
   }
 
