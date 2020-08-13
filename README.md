@@ -112,9 +112,12 @@ This is a small To-Do-List application where the user can create projects and ad
   <img src="resources/images/todos-ins.png" alt="todo image" width="300" height="180">
   - Clicking on the title of a task shows the to-do edit form.  
   <img src="resources/images/todo.png" alt="todo image" width="300" height="180">
+  <hr/>
   - To add new tasks click the plus button at the top-right of the to-dos list.  
   - Each task allows us to enter a title, a description, a notes field to track the procedure keeping notes, due date, priority, completion checkbox, and a checklist with description.  
+
   - All entities can be deleted from their relevant edit views.  
+  
   - Since the persistence of data is achieved using the localStorage, all the data inserted or edited are available only on the computer and the particular browser which have been used.  
   
 <hr/>
