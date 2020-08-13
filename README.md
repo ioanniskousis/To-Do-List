@@ -104,10 +104,14 @@ This is a small To-Do-List application where the user can create projects and ad
 
   - The application comes with some initial data held in seed.js file  
   - Projects stand on the left of the screen. Clicking a project shows the relevant tasks on the right.  
+  <img src="resources/images/projects-min.png" alt="todo image" width="200" height="180">
   - To add a new project click the plus button at the top of the projects list.  
+  <img src="resources/images/project-min.png" alt="todo image" width="200" height="180">
   - In the project edit form add a title and optionally a description and a priority. A high priority shifts the project title to the top.  A second priority factor is the last date it has been edited.  
   - By selecting a project its to-dos appear on the right. Each task shows its priority, title, due date, and completion checkbox.  The completion check can be used in place.  
+  <img src="resources/images/todos-min.png" alt="todo image" width="200" height="180">
   - Clicking on the title of a task shows the to-do edit form.  
+  <img src="resources/images/todo-min.png" alt="todo image" width="200" height="180">
   - To add new tasks click the plus button at the top-right of the to-dos list.  
   - Each task allows us to enter a title, a description, a notes field to track the procedure keeping notes, due date, priority, completion checkbox, and a checklist with description.  
   - All entities can be deleted from their relevant edit views.  
