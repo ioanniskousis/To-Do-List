@@ -117,7 +117,7 @@ const todosDB = (() => {
     }
   };
 
-  // load();
+  load();
 
   return {
     todos,
