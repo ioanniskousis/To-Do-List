@@ -99,6 +99,7 @@ function renderBody(backView, inputContainer, obj) {
 }
 
 function deleteProject(args) {
+  alert('deleteProject - '.concat(args[1]));
   const indexCallBack = args[0];
   const key = args[1];
   const todoId = args[2];
